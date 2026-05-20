@@ -11,7 +11,7 @@
 <style>
 :root{
   --bg:#0a0a0f;--bg2:#111118;--bg3:#1a1a24;--border:#2a2a3a;
-  --accent:#00ff88;--accent2:#ff6b35;--accent3:#7c3aff;--accent4:#00d4ff;
+  --green:#00ff88;--red:#ff4466;--orange:#ff6b35;--purple:#7c3aff;--gold:#ffd700;--rose:#ff6eb4;--pink:#ff6eb4;--blue:#00d4ff;
   --text:#e8e8f0;--text-dim:#666680;--text-mid:#9999b0;
   --gold:#ffd700;--red:#ff4466;--pink:#ff6eb4;--nav-h:64px;
 }
@@ -27,13 +27,13 @@ body::before{content:'';position:fixed;inset:0;background:repeating-linear-gradi
 
 .bottom-nav{position:fixed;bottom:0;left:0;right:0;height:var(--nav-h);background:rgba(10,10,15,0.97);backdrop-filter:blur(20px);border-top:1px solid var(--border);display:flex;z-index:8000;}
 .nav-btn{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;cursor:pointer;background:none;border:none;color:var(--text-dim);transition:color 0.2s;padding-bottom:env(safe-area-inset-bottom);}
-.nav-btn.active{color:var(--accent);}
+.nav-btn.active{color:var(--green);}
 .nav-icon{font-size:18px;line-height:1;}
 .nav-label{font-family:'Space Mono',monospace;font-size:7px;letter-spacing:1px;}
 
 .header{text-align:center;padding:16px 0 20px;}
-.header-tag{font-family:'Space Mono',monospace;font-size:10px;color:var(--accent);letter-spacing:4px;margin-bottom:4px;}
-.header h1{font-family:'Bebas Neue',cursive;font-size:clamp(38px,9vw,66px);letter-spacing:4px;background:linear-gradient(135deg,var(--accent),var(--accent4),var(--accent3));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1;margin-bottom:4px;}
+.header-tag{font-family:'Space Mono',monospace;font-size:10px;color:var(--green);letter-spacing:4px;margin-bottom:4px;}
+.header h1{font-family:'Bebas Neue',cursive;font-size:clamp(38px,9vw,66px);letter-spacing:4px;background:linear-gradient(135deg,var(--green) 0%,var(--blue) 50%,var(--purple) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1;margin-bottom:4px;}
 .header-sub{font-family:'Space Mono',monospace;font-size:10px;color:var(--text-dim);letter-spacing:2px;}
 
 .card{background:var(--bg2);border:1px solid var(--border);border-radius:16px;padding:16px;margin-bottom:12px;position:relative;overflow:hidden;}
@@ -43,18 +43,18 @@ body::before{content:'';position:fixed;inset:0;background:repeating-linear-gradi
 
 /* CHARACTER */
 .char-top{display:flex;align-items:center;gap:14px;margin-bottom:12px;}
-.avatar{width:58px;height:58px;background:linear-gradient(135deg,var(--accent3),var(--accent));border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:26px;flex-shrink:0;}
+.avatar{width:58px;height:58px;background:linear-gradient(135deg,var(--purple),var(--green));border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:26px;flex-shrink:0;}
 .char-name{font-family:'Bebas Neue',cursive;font-size:22px;letter-spacing:2px;margin-bottom:1px;}
-.char-title-el{font-family:'Space Mono',monospace;font-size:10px;color:var(--accent2);letter-spacing:1px;margin-bottom:3px;}
+.char-title-el{font-family:'Space Mono',monospace;font-size:10px;color:var(--orange);letter-spacing:1px;margin-bottom:3px;}
 .char-class{font-family:'Space Mono',monospace;font-size:8px;color:var(--text-dim);letter-spacing:1px;}
 .xp-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:5px;}
-.level-badge{background:var(--accent3);color:#fff;font-family:'Space Mono',monospace;font-size:10px;font-weight:700;padding:3px 10px;border-radius:20px;}
+.level-badge{background:var(--purple);color:#fff;font-family:'Space Mono',monospace;font-size:10px;font-weight:700;padding:3px 10px;border-radius:20px;}
 .xp-label{font-family:'Space Mono',monospace;font-size:9px;color:var(--text-dim);}
-.xp-label span{color:var(--accent);}
+.xp-label span{color:var(--green);}
 .bar-bg{background:var(--bg3);border-radius:6px;overflow:hidden;}
 .bar-fill{border-radius:6px;transition:width 0.8s cubic-bezier(0.4,0,0.2,1);}
 .xp-bar-bg{height:7px;}
-.xp-bar-fill{height:7px;background:linear-gradient(90deg,var(--accent3),var(--accent));}
+.xp-bar-fill{height:7px;background:linear-gradient(90deg,var(--purple),var(--green));}
 
 /* GRIDS */
 .stats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:12px;}
@@ -73,21 +73,21 @@ body::before{content:'';position:fixed;inset:0;background:repeating-linear-gradi
 .appt-stat-label{font-family:'Space Mono',monospace;font-size:7px;color:var(--text-dim);letter-spacing:1px;}
 .appt-dots-row{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px;}
 .appt-dot{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:14px;background:var(--bg3);border:1px solid var(--border);cursor:pointer;transition:all 0.2s;}
-.appt-dot.sale{background:rgba(0,255,136,0.15);border-color:var(--accent);}
-.appt-dot.no-sale{background:rgba(255,107,53,0.1);border-color:var(--accent2);}
+.appt-dot.sale{background:rgba(0,230,118,0.15);border-color:var(--green);}
+.appt-dot.no-sale{background:rgba(255,107,53,0.12);border-color:var(--orange);}
 .appt-btn-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
 .appt-btn{padding:12px;border-radius:12px;border:none;font-family:'Space Mono',monospace;font-size:11px;font-weight:700;letter-spacing:1px;cursor:pointer;transition:all 0.15s;text-transform:uppercase;}
 .appt-btn:active{transform:scale(0.97);}
-.appt-btn.sale-btn{background:var(--accent);color:#000;}
-.appt-btn.no-sale-btn{background:var(--bg3);color:var(--accent2);border:1px solid var(--accent2);}
+.appt-btn.sale-btn{background:var(--green);color:#000;font-weight:700;}
+.appt-btn.no-sale-btn{background:var(--bg3);color:var(--orange);border:1px solid var(--orange);}
 .commission-display{background:linear-gradient(135deg,rgba(0,255,136,0.05),rgba(0,212,255,0.05));border:1px solid rgba(0,255,136,0.2);border-radius:12px;padding:14px;margin-bottom:12px;}
 .commission-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;}
 .commission-label{font-family:'Space Mono',monospace;font-size:9px;color:var(--text-dim);letter-spacing:1px;}
-.commission-val{font-family:'Bebas Neue',cursive;font-size:22px;color:var(--accent);}
+.commission-val{font-family:'Bebas Neue',cursive;font-size:22px;color:var(--green);}
 .commission-rate{font-family:'Space Mono',monospace;font-size:10px;color:var(--text-mid);}
 .tier-bar-row{display:flex;gap:6px;margin-top:8px;}
 .tier-segment{flex:1;height:4px;border-radius:2px;background:var(--bg3);}
-.tier-segment.active{background:var(--accent);}
+.tier-segment.active{background:var(--orange);}
 .tier-label{font-family:'Space Mono',monospace;font-size:8px;color:var(--text-dim);text-align:center;margin-top:3px;}
 .daily-goal{display:flex;align-items:center;gap:10px;background:var(--bg3);border-radius:10px;padding:10px 14px;margin-bottom:12px;}
 .goal-icon{font-size:20px;}
@@ -96,7 +96,7 @@ body::before{content:'';position:fixed;inset:0;background:repeating-linear-gradi
 .goal-status{font-family:'Bebas Neue',cursive;font-size:18px;}
 .sale-input-row{display:flex;gap:8px;margin-bottom:10px;}
 .sale-input{flex:1;background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:10px 12px;font-family:'Space Mono',monospace;font-size:12px;color:var(--text);}
-.sale-input:focus{outline:none;border-color:var(--accent);}
+.sale-input:focus{outline:none;border-color:var(--green);}
 
 /* PUNCH IN */
 .punchin-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px;}
@@ -112,7 +112,7 @@ body::before{content:'';position:fixed;inset:0;background:repeating-linear-gradi
 .dots{display:flex;gap:3px;margin-bottom:8px;}
 .dot{width:7px;height:7px;border-radius:50%;background:var(--bg3);border:1px solid var(--border);}
 .note-input{width:100%;background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:7px 10px;font-family:'Inter',sans-serif;font-size:11px;color:var(--text);margin-bottom:7px;resize:none;height:44px;}
-.note-input:focus{outline:none;border-color:var(--accent3);}
+.note-input:focus{outline:none;border-color:var(--purple);}
 .note-input::placeholder{color:var(--text-dim);}
 .pi-btn{width:100%;padding:9px;border-radius:9px;border:none;font-family:'Space Mono',monospace;font-size:10px;font-weight:700;letter-spacing:1px;cursor:pointer;transition:filter 0.15s;text-transform:uppercase;}
 .pi-btn:active{transform:scale(0.97);}
@@ -120,14 +120,27 @@ body::before{content:'';position:fixed;inset:0;background:repeating-linear-gradi
 .pi-btn:disabled,.pi-btn.done{background:var(--bg3)!important;color:var(--text-dim)!important;cursor:not-allowed;filter:none;}
 
 /* COLORS */
-.c-orange{color:var(--accent2);}.c-green{color:var(--accent);}.c-pink{color:var(--pink);}.c-blue{color:var(--accent4);}.c-purple{color:var(--accent3);}.c-gold{color:var(--gold);}.c-red{color:var(--red);}
-.bg-orange{background:rgba(255,107,53,0.1);}.bg-green{background:rgba(0,255,136,0.1);}.bg-pink{background:rgba(255,110,180,0.1);}.bg-blue{background:rgba(0,212,255,0.1);}.bg-purple{background:rgba(124,58,255,0.1);}.bg-gold{background:rgba(255,215,0,0.1);}.bg-red{background:rgba(255,68,102,0.1);}
-.border-orange{border-top:2px solid var(--accent2);}.border-green{border-top:2px solid var(--accent);}.border-pink{border-top:2px solid var(--pink);}.border-blue{border-top:2px solid var(--accent4);}.border-purple{border-top:2px solid var(--accent3);}.border-gold{border-top:2px solid var(--gold);}.border-red{border-top:2px solid var(--red);}
-.btn-orange{background:var(--accent2);color:#000;}.btn-green{background:var(--accent);color:#000;}.btn-pink{background:var(--pink);color:#000;}.btn-blue{background:var(--accent4);color:#000;}.btn-purple{background:var(--accent3);color:#fff;}.btn-gold{background:var(--gold);color:#000;}.btn-red{background:var(--red);color:#fff;}
-.dot-orange{background:var(--accent2);border-color:var(--accent2);}.dot-green{background:var(--accent);border-color:var(--accent);}.dot-pink{background:var(--pink);border-color:var(--pink);}.dot-blue{background:var(--accent4);border-color:var(--accent4);}.dot-purple{background:var(--accent3);border-color:var(--accent3);}.dot-gold{background:var(--gold);border-color:var(--gold);}.dot-red{background:var(--red);border-color:var(--red);}
+.c-green{color:var(--green);}.c-red{color:var(--red);}.c-gold{color:var(--gold);}.c-purple{color:var(--purple);}.c-dim{color:var(--text-dim);}.c-orange{color:var(--orange);}.c-pink{color:var(--pink);}.c-rose{color:var(--rose);}.c-blue{color:var(--blue);}
+.bg-green{background:rgba(0,255,136,0.1);}.bg-red{background:rgba(255,68,102,0.1);}.bg-orange{background:rgba(255,107,53,0.1);}.bg-purple{background:rgba(124,58,255,0.1);}.bg-blue{background:rgba(0,212,255,0.1);}.bg-pink{background:rgba(255,110,180,0.1);}.bg-gold{background:rgba(255,215,0,0.1);}.bg-rose{background:rgba(255,110,180,0.1);}
+.border-green{border-top:2px solid var(--green);}.border-red{border-top:2px solid var(--red);}.border-orange{border-top:2px solid var(--orange);}.border-purple{border-top:2px solid var(--purple);}.border-blue{border-top:2px solid var(--blue);}.border-pink{border-top:2px solid var(--pink);}.border-gold{border-top:2px solid var(--gold);}.border-rose{border-top:2px solid var(--rose);}
+.btn-green{background:var(--green);color:#000;}.btn-red{background:var(--red);color:#fff;}.btn-orange{background:var(--orange);color:#000;}.btn-purple{background:var(--purple);color:#fff;}.btn-blue{background:var(--blue);color:#000;}.btn-pink{background:var(--pink);color:#000;}.btn-gold{background:var(--gold);color:#000;}.btn-rose{background:var(--rose);color:#000;}
+.dot-green{background:var(--green);border-color:var(--green);}.dot-red{background:var(--red);border-color:var(--red);}.dot-orange{background:var(--orange);border-color:var(--orange);}.dot-purple{background:var(--purple);border-color:var(--purple);}.dot-blue{background:var(--blue);border-color:var(--blue);}.dot-pink{background:var(--pink);border-color:var(--pink);}.dot-gold{background:var(--gold);border-color:var(--gold);}.dot-rose{background:var(--rose);border-color:var(--rose);}
 
 /* DEBT */
-.debt-card{background:var(--bg2);border:1px solid var(--border);border-radius:14px;padding:16px;margin-bottom:10px;}
+.debt-card{background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:14px 16px;margin-bottom:8px;display:flex;align-items:center;gap:12px;cursor:pointer;transition:border-color 0.2s;}
+.debt-card:hover{border-color:rgba(255,61,90,0.3);}
+.debt-card-icon{font-size:22px;flex-shrink:0;}
+.debt-card-body{flex:1;min-width:0;}
+.debt-card-name{font-family:'Space Mono',monospace;font-size:10px;color:var(--text-mid);letter-spacing:1px;margin-bottom:3px;}
+.debt-card-amount{font-family:'Bebas Neue',cursive;font-size:24px;color:var(--red);line-height:1;margin-bottom:5px;}
+.debt-card-bar-bg{background:var(--bg3);border-radius:3px;height:3px;overflow:hidden;}
+.debt-card-bar-fill{height:100%;background:var(--red);border-radius:3px;transition:width 0.5s ease;opacity:0.7;}
+.debt-card-actions{display:flex;flex-direction:column;gap:6px;flex-shrink:0;}
+.debt-edit-input{width:110px;background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:6px 8px;font-family:'Space Mono',monospace;font-size:11px;color:var(--text);text-align:right;}
+.debt-edit-input:focus{outline:none;border-color:var(--red);}
+.debt-save-btn{padding:6px 10px;border-radius:7px;border:none;background:var(--green);color:#000;font-family:'Space Mono',monospace;font-size:9px;font-weight:700;cursor:pointer;letter-spacing:1px;width:100%;}
+.debt-del-btn{padding:4px 10px;border-radius:7px;border:1px solid var(--border);background:none;color:var(--text-dim);font-family:'Space Mono',monospace;font-size:9px;cursor:pointer;width:100%;}
+.debt-del-btn:hover{border-color:var(--red);color:var(--red);}
 .debt-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;}
 .debt-name{font-family:'Bebas Neue',cursive;font-size:18px;letter-spacing:1px;}
 .debt-amount{font-family:'Bebas Neue',cursive;font-size:28px;color:var(--red);}
@@ -140,20 +153,20 @@ body::before{content:'';position:fixed;inset:0;background:repeating-linear-gradi
 
 /* 100K GOAL */
 .goal-100k{background:linear-gradient(135deg,rgba(255,215,0,0.08),rgba(255,107,53,0.05));border:1px solid rgba(255,215,0,0.3);border-radius:16px;padding:18px;margin-bottom:12px;}
-.goal-100k-amount{font-family:'Bebas Neue',cursive;font-size:48px;background:linear-gradient(135deg,var(--gold),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1;margin-bottom:4px;}
+.goal-100k-amount{font-family:'Bebas Neue',cursive;font-size:48px;background:linear-gradient(135deg,var(--gold),var(--orange));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1;margin-bottom:4px;}
 .goal-100k-label{font-family:'Space Mono',monospace;font-size:9px;color:var(--text-dim);letter-spacing:2px;margin-bottom:12px;}
 .goal-100k-bar-bg{background:var(--bg3);border-radius:6px;height:8px;overflow:hidden;margin-bottom:6px;}
-.goal-100k-bar-fill{height:100%;background:linear-gradient(90deg,var(--gold),var(--accent2));border-radius:6px;transition:width 0.8s ease;}
+.goal-100k-bar-fill{height:100%;background:linear-gradient(90deg,var(--green),var(--gold));border-radius:6px;transition:width 0.8s ease;}
 .goal-100k-pct{font-family:'Space Mono',monospace;font-size:10px;color:var(--gold);}
 .savings-input-row{display:flex;gap:8px;margin-top:10px;}
 .savings-input{flex:1;background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:8px 10px;font-family:'Space Mono',monospace;font-size:11px;color:var(--text);}
 .savings-input:focus{outline:none;border-color:var(--gold);}
-.savings-btn{padding:8px 14px;border-radius:8px;border:none;background:var(--gold);color:#000;font-family:'Space Mono',monospace;font-size:10px;font-weight:700;cursor:pointer;}
+.savings-btn{padding:8px 14px;border-radius:8px;border:none;background:var(--green);color:#000;font-family:'Space Mono',monospace;font-size:10px;font-weight:700;cursor:pointer;}
 
 /* QUOTES & IDEAS */
 .add-row{display:flex;gap:8px;margin-bottom:12px;}
 .add-input{flex:1;background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:10px 12px;font-family:'Inter',sans-serif;font-size:12px;color:var(--text);}
-.add-input:focus{outline:none;border-color:var(--accent3);}
+.add-input:focus{outline:none;border-color:var(--purple);}
 .add-btn{padding:10px 16px;border-radius:10px;border:none;font-family:'Space Mono',monospace;font-size:10px;font-weight:700;cursor:pointer;letter-spacing:1px;white-space:nowrap;}
 .quote-item{background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:14px 16px;margin-bottom:8px;position:relative;}
 .quote-text{font-size:13px;color:var(--text);line-height:1.6;font-style:italic;margin-bottom:6px;}
@@ -162,22 +175,22 @@ body::before{content:'';position:fixed;inset:0;background:repeating-linear-gradi
 .idea-title{font-size:13px;color:var(--text);font-weight:600;margin-bottom:4px;}
 .idea-desc{font-size:11px;color:var(--text-mid);line-height:1.5;margin-bottom:6px;}
 .idea-meta{font-family:'Space Mono',monospace;font-size:9px;color:var(--text-dim);}
-.idea-score{font-family:'Bebas Neue',cursive;font-size:14px;padding:2px 8px;border-radius:8px;background:rgba(124,58,255,0.1);color:var(--accent3);}
+.idea-score{font-family:'Bebas Neue',cursive;font-size:14px;padding:2px 8px;border-radius:8px;background:rgba(124,58,255,0.1);color:var(--purple);}
 .delete-btn{position:absolute;top:10px;right:10px;background:none;border:none;color:var(--text-dim);font-size:16px;cursor:pointer;padding:2px 6px;border-radius:6px;}
 .delete-btn:hover{color:var(--red);}
 .idea-add-form{background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:14px;margin-bottom:12px;}
 .idea-add-form input,.idea-add-form textarea{width:100%;background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:8px 10px;font-family:'Inter',sans-serif;font-size:12px;color:var(--text);margin-bottom:8px;}
-.idea-add-form input:focus,.idea-add-form textarea:focus{outline:none;border-color:var(--accent3);}
+.idea-add-form input:focus,.idea-add-form textarea:focus{outline:none;border-color:var(--purple);}
 .idea-add-form textarea{resize:none;height:60px;}
 .score-row{display:flex;gap:6px;margin-bottom:10px;align-items:center;}
 .score-label{font-family:'Space Mono',monospace;font-size:9px;color:var(--text-dim);}
 .score-btn{padding:4px 10px;border-radius:8px;border:1px solid var(--border);background:var(--bg3);color:var(--text-dim);font-family:'Space Mono',monospace;font-size:9px;cursor:pointer;}
-.score-btn.selected{background:var(--accent3);border-color:var(--accent3);color:#fff;}
+.score-btn.selected{background:var(--purple);border-color:var(--purple);color:#fff;}
 
 /* ACHIEVEMENTS */
 .ach-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:12px;}
 .ach-card{background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:12px 8px;text-align:center;}
-.ach-card.unlocked{border-color:var(--gold);background:rgba(255,215,0,0.04);}
+.ach-card.unlocked{border-color:var(--gold);background:rgba(255,193,7,0.05);}
 .ach-card.locked{opacity:0.25;filter:grayscale(1);}
 .ach-icon-el{font-size:24px;display:block;margin-bottom:5px;}
 .ach-name-el{font-family:'Space Mono',monospace;font-size:7px;color:var(--text-dim);letter-spacing:1px;line-height:1.4;}
@@ -194,12 +207,12 @@ body::before{content:'';position:fixed;inset:0;background:repeating-linear-gradi
 /* QUESTS */
 .quest-card{background:var(--bg2);border:1px solid var(--border);border-radius:14px;padding:14px;margin-bottom:10px;position:relative;overflow:hidden;}
 .quest-card.active::before,.quest-card.side::before,.quest-card.locked::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;}
-.quest-card.active::before{background:var(--accent);}
-.quest-card.side::before{background:var(--accent2);}
+.quest-card.active::before{background:var(--green);}
+.quest-card.side::before{background:var(--orange);}
 .quest-card.locked{opacity:0.4;}
 .quest-card.locked::before{background:var(--border);}
 .quest-type{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:2px;margin-bottom:5px;}
-.qt-m{color:var(--accent);}.qt-s{color:var(--accent2);}.qt-l{color:var(--text-dim);}
+.qt-m{color:var(--green);}.qt-s{color:var(--orange);}.qt-l{color:var(--text-dim);}
 .quest-title{font-family:'Bebas Neue',cursive;font-size:19px;letter-spacing:1px;margin-bottom:4px;}
 .quest-desc{font-size:11px;color:var(--text-mid);line-height:1.5;margin-bottom:7px;}
 .quest-reward{font-family:'Space Mono',monospace;font-size:9px;color:var(--gold);margin-bottom:7px;}
@@ -209,18 +222,18 @@ body::before{content:'';position:fixed;inset:0;background:repeating-linear-gradi
 
 /* TIMELINE */
 .timeline{position:relative;padding-left:20px;margin-bottom:12px;}
-.timeline::before{content:'';position:absolute;left:4px;top:8px;bottom:0;width:1px;background:linear-gradient(to bottom,var(--accent),var(--accent3),transparent);}
+.timeline::before{content:'';position:absolute;left:4px;top:8px;bottom:0;width:1px;background:linear-gradient(to bottom,var(--green),var(--purple),transparent);}
 .tl-item{position:relative;margin-bottom:18px;}
-.tl-item::before{content:'';position:absolute;left:-17px;top:5px;width:8px;height:8px;border-radius:50%;background:var(--accent3);border:2px solid var(--bg);}
-.tl-item.active::before{background:var(--accent);}
+.tl-item::before{content:'';position:absolute;left:-17px;top:5px;width:8px;height:8px;border-radius:50%;background:var(--purple);border:2px solid var(--bg);}
+.tl-item.active::before{background:var(--green);}
 .tl-item.future::before{background:var(--border);}
 .tl-phase{font-family:'Space Mono',monospace;font-size:9px;color:var(--text-dim);letter-spacing:2px;margin-bottom:2px;}
 .tl-title{font-family:'Bebas Neue',cursive;font-size:16px;letter-spacing:1px;margin-bottom:3px;}
 .tl-desc{font-size:11px;color:var(--text-mid);line-height:1.5;}
 .tl-badge{display:inline-block;font-family:'Space Mono',monospace;font-size:9px;padding:2px 8px;border-radius:10px;margin-top:4px;}
-.b-now{background:rgba(0,255,136,0.1);color:var(--accent);}
-.b-soon{background:rgba(0,212,255,0.1);color:var(--accent4);}
-.b-future{background:rgba(124,58,255,0.1);color:var(--accent3);}
+.b-now{background:rgba(0,255,136,0.1);color:var(--green);}
+.b-soon{background:rgba(0,212,255,0.1);color:var(--blue);}
+.b-future{background:rgba(124,58,255,0.1);color:var(--purple);}
 .b-dream{background:rgba(255,215,0,0.1);color:var(--gold);}
 
 /* FINAL BOSS */
@@ -228,13 +241,13 @@ body::before{content:'';position:fixed;inset:0;background:repeating-linear-gradi
 .final-boss::before{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(ellipse at center,rgba(124,58,255,0.06),transparent 60%);animation:pulse 4s ease infinite;}
 @keyframes pulse{0%,100%{transform:scale(1);opacity:0.5;}50%{transform:scale(1.1);opacity:1;}}
 .boss-tag{font-family:'Space Mono',monospace;font-size:9px;color:var(--text-dim);letter-spacing:3px;margin-bottom:6px;position:relative;}
-.boss-goal{font-family:'Bebas Neue',cursive;font-size:clamp(22px,6vw,38px);letter-spacing:3px;background:linear-gradient(135deg,var(--gold),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;position:relative;margin-bottom:5px;}
+.boss-goal{font-family:'Bebas Neue',cursive;font-size:clamp(22px,6vw,38px);letter-spacing:3px;background:linear-gradient(135deg,var(--gold),var(--orange));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;position:relative;margin-bottom:5px;}
 .boss-sub{font-size:11px;color:var(--text-mid);position:relative;}
 .boss-items{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:10px;position:relative;}
 .boss-item{font-size:11px;color:var(--text-mid);}
 .mantra{background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:16px;text-align:center;margin-bottom:12px;}
 .mantra-text{font-family:'Bebas Neue',cursive;font-size:clamp(14px,3.5vw,21px);letter-spacing:2px;color:var(--text-mid);line-height:1.4;}
-.mantra-text span{color:var(--accent);}
+.mantra-text span{color:var(--green);}
 
 /* LOG */
 .log-item{background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:10px 12px;margin-bottom:8px;display:flex;align-items:flex-start;gap:10px;}
@@ -243,7 +256,7 @@ body::before{content:'';position:fixed;inset:0;background:repeating-linear-gradi
 .log-name-el{font-size:12px;color:var(--text);font-weight:500;margin-bottom:2px;}
 .log-note-el{font-size:10px;color:var(--text-mid);font-style:italic;margin-bottom:2px;}
 .log-time-el{font-family:'Space Mono',monospace;font-size:8px;color:var(--text-dim);}
-.log-xp-el{font-family:'Bebas Neue',cursive;font-size:16px;color:var(--accent);flex-shrink:0;}
+.log-xp-el{font-family:'Bebas Neue',cursive;font-size:16px;color:var(--green);flex-shrink:0;}
 .empty-state{text-align:center;padding:40px 20px;font-family:'Space Mono',monospace;font-size:11px;color:var(--text-dim);letter-spacing:1px;line-height:1.8;}
 
 /* OVERLAYS */
@@ -251,21 +264,21 @@ body::before{content:'';position:fixed;inset:0;background:repeating-linear-gradi
 .levelup-screen.show{display:flex;}
 .lu-icon{font-size:70px;margin-bottom:16px;animation:bounce 0.6s ease infinite alternate;}
 @keyframes bounce{from{transform:scale(1);}to{transform:scale(1.08);}}
-.lu-title{font-family:'Bebas Neue',cursive;font-size:clamp(44px,11vw,72px);letter-spacing:4px;background:linear-gradient(135deg,var(--gold),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:6px;}
-.lu-level{font-family:'Bebas Neue',cursive;font-size:26px;color:var(--accent);letter-spacing:2px;margin-bottom:4px;}
+.lu-title{font-family:'Bebas Neue',cursive;font-size:clamp(44px,11vw,72px);letter-spacing:4px;background:linear-gradient(135deg,var(--gold),var(--orange));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:6px;}
+.lu-level{font-family:'Bebas Neue',cursive;font-size:26px;color:var(--green);letter-spacing:2px;margin-bottom:4px;}
 .lu-title-name{font-family:'Space Mono',monospace;font-size:12px;color:var(--text-mid);letter-spacing:2px;margin-bottom:28px;}
-.lu-btn{background:var(--accent);color:#000;font-family:'Space Mono',monospace;font-size:12px;font-weight:700;letter-spacing:2px;padding:14px 32px;border-radius:12px;border:none;cursor:pointer;}
+.lu-btn{background:var(--green);color:#000;font-family:'Space Mono',monospace;font-size:12px;font-weight:700;letter-spacing:2px;padding:14px 32px;border-radius:12px;border:none;cursor:pointer;}
 .ach-popup{position:fixed;top:12px;right:12px;background:var(--bg2);border:1px solid var(--gold);border-radius:14px;padding:12px 16px;z-index:9998;display:flex;align-items:center;gap:10px;transform:translateX(220px);opacity:0;transition:all 0.4s cubic-bezier(0.4,0,0.2,1);max-width:260px;}
 .ach-popup.show{transform:translateX(0);opacity:1;}
 .ach-popup-icon{font-size:26px;flex-shrink:0;}
 .ach-popup-tag{font-family:'Space Mono',monospace;font-size:8px;color:var(--gold);letter-spacing:2px;margin-bottom:2px;}
 .ach-popup-name{font-size:12px;color:var(--text);font-weight:600;}
-.toast{position:fixed;top:12px;left:50%;transform:translateX(-50%) translateY(-100px);background:var(--bg2);border:1px solid var(--accent);border-radius:12px;padding:9px 18px;font-family:'Space Mono',monospace;font-size:10px;color:var(--accent);z-index:9997;transition:transform 0.3s cubic-bezier(0.4,0,0.2,1);white-space:nowrap;}
+.toast{position:fixed;top:12px;left:50%;transform:translateX(-50%) translateY(-100px);background:var(--bg2);border:1px solid var(--green);border-radius:12px;padding:9px 18px;font-family:'Space Mono',monospace;font-size:10px;color:var(--green);z-index:9997;transition:transform 0.3s cubic-bezier(0.4,0,0.2,1);white-space:nowrap;}
 .toast.show{transform:translateX(-50%) translateY(0);}
 .toast-xp{font-family:'Bebas Neue',cursive;font-size:18px;display:inline;margin-right:6px;}
 .confetti-piece{position:fixed;width:8px;height:8px;border-radius:2px;pointer-events:none;z-index:9990;animation:cfFall 2s ease-in forwards;}
 @keyframes cfFall{0%{transform:translateY(-20px) rotate(0deg);opacity:1;}100%{transform:translateY(100vh) rotate(720deg);opacity:0;}}
-.combo-banner{background:linear-gradient(135deg,var(--accent3),var(--accent));border-radius:12px;padding:10px 14px;margin-bottom:12px;text-align:center;display:none;}
+.combo-banner{background:linear-gradient(135deg,var(--purple),var(--green));border-radius:12px;padding:10px 14px;margin-bottom:12px;text-align:center;display:none;}
 .combo-banner.show{display:block;}
 .combo-title-el{font-family:'Bebas Neue',cursive;font-size:20px;letter-spacing:2px;color:#000;margin-bottom:1px;}
 .combo-sub-el{font-family:'Space Mono',monospace;font-size:9px;color:rgba(0,0,0,0.6);letter-spacing:1px;}
@@ -273,13 +286,13 @@ body::before{content:'';position:fixed;inset:0;background:repeating-linear-gradi
 /* TODO LIST */
 .todo-add-row{display:flex;gap:8px;margin-bottom:10px;}
 .todo-input{flex:1;background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:10px 12px;font-family:'Inter',sans-serif;font-size:13px;color:var(--text);}
-.todo-input:focus{outline:none;border-color:var(--accent);}
+.todo-input:focus{outline:none;border-color:var(--purple);}
 .todo-input::placeholder{color:var(--text-dim);}
-.todo-add-btn{width:40px;height:40px;border-radius:10px;border:none;background:var(--accent);color:#000;font-size:22px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.todo-add-btn{width:40px;height:40px;border-radius:10px;border:none;background:var(--green);color:#000;font-size:22px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
 .todo-item{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--border);}
 .todo-item:last-child{border-bottom:none;}
 .todo-check{width:22px;height:22px;border-radius:6px;border:2px solid var(--border);background:none;cursor:pointer;flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all 0.2s;}
-.todo-check.checked{background:var(--accent);border-color:var(--accent);}
+.todo-check.checked{background:var(--green);border-color:var(--green);}
 .todo-check.checked::after{content:'✓';color:#000;font-size:13px;font-weight:700;}
 .todo-text{flex:1;font-size:13px;color:var(--text);transition:all 0.2s;line-height:1.4;}
 .todo-text.done{color:var(--text-dim);text-decoration:line-through;}
@@ -287,9 +300,21 @@ body::before{content:'';position:fixed;inset:0;background:repeating-linear-gradi
 .todo-del:hover{color:var(--red);}
 .todo-empty{font-family:'Space Mono',monospace;font-size:10px;color:var(--text-dim);letter-spacing:1px;text-align:center;padding:16px 0;}
 .todo-progress{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;}
-.todo-pct{font-family:'Bebas Neue',cursive;font-size:18px;color:var(--accent);}
+.todo-pct{font-family:'Bebas Neue',cursive;font-size:18px;color:var(--green);}
 .todo-count{font-family:'Space Mono',monospace;font-size:9px;color:var(--text-dim);}
 
+
+/* SESSION EDIT */
+.log-item{position:relative;}
+.log-item-actions{display:flex;gap:6px;margin-top:8px;}
+.log-action-btn{padding:4px 10px;border-radius:6px;border:1px solid var(--border);background:none;color:var(--text-dim);font-family:'Space Mono',monospace;font-size:9px;cursor:pointer;letter-spacing:1px;transition:all 0.15s;}
+.log-action-btn:hover{border-color:var(--text-mid);color:var(--text);}
+.log-action-btn.danger:hover{border-color:var(--red);color:var(--red);}
+.log-edit-area{margin-top:8px;display:none;}
+.log-edit-area.open{display:block;}
+.log-edit-input{width:100%;background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:8px 10px;font-family:'Inter',sans-serif;font-size:12px;color:var(--text);resize:none;height:60px;margin-bottom:6px;}
+.log-edit-input:focus{outline:none;border-color:var(--purple);}
+.log-edit-save{padding:5px 14px;border-radius:7px;border:none;background:var(--green);color:#000;font-family:'Space Mono',monospace;font-size:9px;font-weight:700;cursor:pointer;letter-spacing:1px;}
 @keyframes fadeUp{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
 .fade-up{animation:fadeUp 0.35s ease both;}
 </style>
@@ -320,7 +345,7 @@ body::before{content:'';position:fixed;inset:0;background:repeating-linear-gradi
     <div class="header-sub" id="today-date">LOADING...</div>
   </div>
   <div class="card fade-up" style="position:relative;">
-    <div class="top-bar" style="background:linear-gradient(90deg,var(--accent3),var(--accent),var(--accent4));"></div>
+    <div class="top-bar" style="background:linear-gradient(90deg,var(--purple),var(--green),var(--blue));"></div>
     <div class="char-top">
       <div class="avatar">🧭</div>
       <div>
@@ -361,7 +386,7 @@ body::before{content:'';position:fixed;inset:0;background:repeating-linear-gradi
         <button onclick="clearCompletedTodos()" style="background:none;border:1px solid var(--border);color:var(--text-dim);font-family:'Space Mono',monospace;font-size:8px;letter-spacing:1px;padding:3px 8px;border-radius:6px;cursor:pointer;" id="clear-done-btn">CLEAR DONE</button>
       </div>
     </div>
-    <div class="bar-bg" style="height:4px;overflow:hidden;border-radius:4px;margin-bottom:12px;"><div class="bar-fill" id="todo-bar" style="height:4px;background:var(--accent);width:0%;transition:width 0.4s ease;"></div></div>
+    <div class="bar-bg" style="height:4px;overflow:hidden;border-radius:4px;margin-bottom:12px;"><div class="bar-fill" id="todo-bar" style="height:4px;background:var(--green);width:0%;transition:width 0.4s ease;"></div></div>
     <div class="todo-add-row">
       <input class="todo-input" id="todo-input" type="text" placeholder="Add a task for today..." onkeydown="if(event.key==='Enter')addTodo()">
       <button class="todo-add-btn" onclick="addTodo()">+</button>
@@ -398,7 +423,7 @@ body::before{content:'';position:fixed;inset:0;background:repeating-linear-gradi
     </div>
   </div>
   <div class="mantra">
-    <div class="mantra-text">YOU'RE NOT LOST. <span>YOU'RE LOADING.</span><br>THE COUCH IS TEMPORARY. <span>THE MISSION IS NOT.</span></div>
+    <div class="mantra-text"><span>PROCRASTINATION</span> IS THE <span>ASSASSINATION</span><br>OF YOUR <span>DESTINATION</span></div>
   </div>
 </div>
 </div>
@@ -446,7 +471,7 @@ body::before{content:'';position:fixed;inset:0;background:repeating-linear-gradi
 
   <!-- Today's appointments -->
   <div class="card">
-    <div class="top-bar" style="background:var(--accent2);"></div>
+    <div class="top-bar" style="background:var(--orange);"></div>
     <div class="appt-header">
       <div>
         <div class="appt-label">APPOINTMENTS TODAY</div>
@@ -454,7 +479,7 @@ body::before{content:'';position:fixed;inset:0;background:repeating-linear-gradi
       </div>
       <div style="text-align:right;">
         <div class="appt-label">CLOSE RATE</div>
-        <div class="appt-big" id="close-rate" style="color:var(--accent)">—</div>
+        <div class="appt-big c-green" id="close-rate">—</div>
       </div>
     </div>
     <div class="appt-stats">
@@ -486,7 +511,7 @@ body::before{content:'';position:fixed;inset:0;background:repeating-linear-gradi
       <div class="appt-stat"><span class="appt-stat-val c-green" id="m-comm">$0</span><span class="appt-stat-label">COMM.</span></div>
     </div>
     <div class="bar-bg" style="height:5px;overflow:hidden;border-radius:4px;margin-top:8px;">
-      <div class="bar-fill" id="monthly-tier-bar" style="height:5px;background:var(--gold);width:0%;transition:width 0.6s ease;"></div>
+      <div class="bar-fill" id="monthly-tier-bar" style="height:5px;background:var(--orange);width:0%;transition:width 0.6s ease;"></div>
     </div>
     <div style="display:flex;justify-content:space-between;margin-top:4px;">
       <span style="font-family:'Space Mono',monospace;font-size:8px;color:var(--text-dim);">$0</span>
@@ -570,10 +595,10 @@ body::before{content:'';position:fixed;inset:0;background:repeating-linear-gradi
       <textarea class="note-input" id="n-build" placeholder="What did you build?"></textarea>
       <button class="pi-btn btn-gold" id="b-build" onclick="punchIn('build')">PUNCH IN</button>
     </div>
-    <div class="punchin-card border-red">
+    <div class="punchin-card border-rose">
       <span class="pi-icon">💕</span><div class="pi-name">Quality Time</div>
       <div class="pi-desc">Called her, planned something. Long distance takes effort.</div>
-      <div class="pi-xp-badge bg-red c-red">+30 XP</div>
+      <div class="pi-xp-badge bg-rose c-rose">+30 XP</div>
       <div class="streak-row"><span class="streak-label">🔥 STREAK</span><span class="streak-val" id="s-relationship">0</span></div>
       <div class="dots" id="d-relationship"></div>
       <textarea class="note-input" id="n-relationship" placeholder="Add a note..."></textarea>
@@ -607,68 +632,68 @@ body::before{content:'';position:fixed;inset:0;background:repeating-linear-gradi
 
   <!-- DEBT -->
   <div class="section-title">💳 Debt Tracker</div>
-  <div class="debt-card">
-    <div class="debt-header">
-      <div class="debt-name">🍎 Apple Card</div>
-      <div class="debt-amount" id="apple-amount">$3,217.62</div>
+
+  <!-- Total -->
+  <div class="card" style="padding:16px;margin-bottom:10px;">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
+      <div style="font-family:'Space Mono',monospace;font-size:9px;color:var(--text-dim);letter-spacing:2px;">TOTAL REMAINING</div>
+      <div style="font-family:'Space Mono',monospace;font-size:9px;color:var(--text-dim);letter-spacing:1px;">KILL THIS NUMBER</div>
     </div>
-    <div class="debt-bar-bg"><div class="debt-bar-fill" id="apple-bar" style="width:100%"></div></div>
-    <div class="debt-input-row">
-      <input class="debt-input" id="apple-input" type="number" placeholder="Current balance $">
-      <button class="debt-btn" onclick="updateDebt('apple')">UPDATE</button>
-    </div>
-  </div>
-  <div class="debt-card">
-    <div class="debt-header">
-      <div class="debt-name">💳 Amex</div>
-      <div class="debt-amount" id="amex-amount">$1,980.48</div>
-    </div>
-    <div class="debt-bar-bg"><div class="debt-bar-fill" id="amex-bar" style="width:100%"></div></div>
-    <div class="debt-input-row">
-      <input class="debt-input" id="amex-input" type="number" placeholder="Current balance $">
-      <button class="debt-btn" onclick="updateDebt('amex')">UPDATE</button>
-    </div>
-  </div>
-  <div class="debt-card">
-    <div class="debt-header">
-      <div class="debt-name">🎓 Student Loans</div>
-      <div class="debt-amount" id="loans-amount">$0</div>
-    </div>
-    <div class="debt-bar-bg"><div class="debt-bar-fill" id="loans-bar" style="width:100%"></div></div>
-    <div class="debt-input-row">
-      <input class="debt-input" id="loans-input" type="number" placeholder="Current balance $">
-      <button class="debt-btn" onclick="updateDebt('loans')">UPDATE</button>
+    <div style="font-family:'Bebas Neue',cursive;font-size:52px;color:var(--red);line-height:1;" id="total-debt">$5,198.10</div>
+    <div class="debt-bar-bg" style="margin-top:10px;"><div class="debt-bar-fill" id="total-debt-bar" style="width:100%"></div></div>
+    <div style="display:flex;justify-content:space-between;margin-top:4px;">
+      <span style="font-family:'Space Mono',monospace;font-size:8px;color:var(--text-dim);">ORIGINAL DEBT</span>
+      <span style="font-family:'Space Mono',monospace;font-size:8px;color:var(--green);" id="debt-paid-label">$0 paid off</span>
     </div>
   </div>
 
-  <div class="card" style="text-align:center;padding:16px;">
-    <div style="font-family:'Space Mono',monospace;font-size:9px;color:var(--text-dim);letter-spacing:2px;margin-bottom:4px;">TOTAL DEBT REMAINING</div>
-    <div style="font-family:'Bebas Neue',cursive;font-size:42px;color:var(--red);" id="total-debt">$5,198.10</div>
-    <div style="font-family:'Space Mono',monospace;font-size:9px;color:var(--text-dim);margin-top:4px;">KILL THIS NUMBER</div>
+  <!-- Debt list -->
+  <div id="debt-list"></div>
+
+  <!-- Add new debt -->
+  <div class="card" id="add-debt-card" style="padding:14px;">
+    <div style="font-family:'Space Mono',monospace;font-size:9px;color:var(--text-dim);letter-spacing:2px;margin-bottom:10px;">+ ADD A DEBT</div>
+    <div style="display:flex;gap:8px;margin-bottom:8px;">
+      <input class="debt-input" id="new-debt-name" type="text" placeholder="Name (e.g. Apple Card)" style="flex:1.5;">
+      <input class="debt-input" id="new-debt-amount" type="number" placeholder="Balance $" style="flex:1;">
+    </div>
+    <div style="display:flex;gap:8px;">
+      <select class="debt-input" id="new-debt-icon" style="flex:0.8;">
+        <option value="💳">💳 Card</option>
+        <option value="🎓">🎓 Student Loan</option>
+        <option value="🚗">🚗 Car</option>
+        <option value="🏠">🏠 Mortgage</option>
+        <option value="🏦">🏦 Bank Loan</option>
+        <option value="👤">👤 Personal</option>
+        <option value="📱">📱 Device</option>
+        <option value="💊">💊 Medical</option>
+      </select>
+      <button class="debt-btn" style="flex:1;" onclick="addDebt()">ADD DEBT</button>
+    </div>
   </div>
 
   <!-- Margot Molds -->
   <div class="section-title">🏪 Margot Molds Revenue</div>
   <div class="card">
-    <div class="top-bar" style="background:var(--accent);"></div>
-    <div style="font-family:'Bebas Neue',cursive;font-size:42px;color:var(--accent);" id="rev-amount">$0/mo</div>
+    <div class="top-bar" style="background:var(--green);"></div>
+    <div style="font-family:'Bebas Neue',cursive;font-size:42px;color:var(--green);" id="rev-amount">$0/mo</div>
     <div style="font-family:'Space Mono',monospace;font-size:9px;color:var(--text-dim);margin-bottom:10px;">GOAL: $10,000/MO</div>
-    <div class="bar-bg" style="height:6px;overflow:hidden;border-radius:4px;margin-bottom:8px;"><div class="bar-fill" id="rev-bar" style="height:6px;background:var(--accent);width:0%;transition:width 0.6s;"></div></div>
+    <div class="bar-bg" style="height:6px;overflow:hidden;border-radius:4px;margin-bottom:8px;"><div class="bar-fill" id="rev-bar" style="height:6px;background:var(--green);width:0%;transition:width 0.6s;"></div></div>
     <div class="savings-input-row">
       <input class="savings-input" id="rev-input" type="number" placeholder="This month $">
-      <button class="savings-btn" style="background:var(--accent);" onclick="updateRevenue()">SET</button>
+      <button class="savings-btn" style="background:var(--green);" onclick="updateRevenue()">SET</button>
     </div>
   </div>
 
   <!-- Email subs -->
   <div class="section-title">📧 Email Subscribers</div>
   <div class="card">
-    <div style="font-family:'Bebas Neue',cursive;font-size:42px;color:var(--accent3);" id="email-amount">60</div>
+    <div style="font-family:'Bebas Neue',cursive;font-size:42px;color:var(--purple);" id="email-amount">60</div>
     <div style="font-family:'Space Mono',monospace;font-size:9px;color:var(--text-dim);margin-bottom:10px;">GOAL: 500 SUBSCRIBERS</div>
-    <div class="bar-bg" style="height:6px;overflow:hidden;border-radius:4px;margin-bottom:8px;"><div class="bar-fill" id="email-bar" style="height:6px;background:var(--accent3);width:12%;transition:width 0.6s;"></div></div>
+    <div class="bar-bg" style="height:6px;overflow:hidden;border-radius:4px;margin-bottom:8px;"><div class="bar-fill" id="email-bar" style="height:6px;background:var(--purple);width:12%;transition:width 0.6s;"></div></div>
     <div class="savings-input-row">
       <input class="savings-input" id="email-input" type="number" placeholder="Current subscribers">
-      <button class="savings-btn" style="background:var(--accent3);color:#fff;" onclick="updateEmails()">SET</button>
+      <button class="savings-btn" style="background:var(--purple);color:#fff;" onclick="updateEmails()">SET</button>
     </div>
   </div>
 </div>
@@ -687,7 +712,7 @@ body::before{content:'';position:fixed;inset:0;background:repeating-linear-gradi
   <div class="section-title">💬 Quotes That Hit</div>
   <div class="add-row">
     <input class="add-input" id="quote-input" type="text" placeholder="Save a quote that moves you...">
-    <button class="add-btn" style="background:var(--accent3);color:#fff;" onclick="addQuote()">SAVE</button>
+    <button class="add-btn" style="background:var(--purple);color:#fff;" onclick="addQuote()">SAVE</button>
   </div>
   <div id="quotes-list"><div class="empty-state" style="padding:20px;">// NO QUOTES YET<br>Save something that moves you</div></div>
 
@@ -704,7 +729,7 @@ body::before{content:'';position:fixed;inset:0;background:repeating-linear-gradi
       <button class="score-btn" onclick="selectScore(4)">4</button>
       <button class="score-btn" onclick="selectScore(5)">5 🔥</button>
     </div>
-    <button class="add-btn" style="background:var(--accent3);color:#fff;width:100%;padding:10px;border-radius:8px;" onclick="addIdea()">+ ADD IDEA</button>
+    <button class="add-btn" style="background:var(--purple);color:#fff;width:100%;padding:10px;border-radius:8px;" onclick="addIdea()">+ ADD IDEA</button>
   </div>
   <div id="ideas-list"><div class="empty-state" style="padding:20px;">// NO IDEAS YET<br>Every big business started as a note</div></div>
 </div>
@@ -725,7 +750,7 @@ body::before{content:'';position:fixed;inset:0;background:repeating-linear-gradi
     <div class="quest-desc">Clear all debt. Get the car. Build 3-month cash cushion. 1 sale per day minimum.</div>
     <div class="quest-reward">🪙 REWARD: Freedom to go all-in on Monica's business</div>
     <div class="prog-label"><span>TOTAL DEBT CLEARED</span><span id="debt-quest-pct">0%</span></div>
-    <div class="prog-bar"><div class="prog-fill" style="background:var(--accent2);" id="debt-quest-bar"></div></div>
+    <div class="prog-bar"><div class="prog-fill" style="background:var(--orange);" id="debt-quest-bar"></div></div>
   </div>
   <div class="quest-card active">
     <div class="quest-type qt-m">◆ MAIN QUEST · ACTIVE</div>
@@ -741,7 +766,7 @@ body::before{content:'';position:fixed;inset:0;background:repeating-linear-gradi
     <div class="quest-desc">Grow Monica's store from $1k to $10k/month. Email list. Digital products.</div>
     <div class="quest-reward">🪙 REWARD: First real asset. Proof you can build.</div>
     <div class="prog-label"><span>MONTHLY REVENUE</span><span id="rev-quest-label">$0 / $10k</span></div>
-    <div class="prog-bar"><div class="prog-fill" style="background:var(--accent);" id="rev-quest-bar"></div></div>
+    <div class="prog-bar"><div class="prog-fill" style="background:var(--green);" id="rev-quest-bar"></div></div>
   </div>
   <div class="section-title">🎯 Side Quests</div>
   <div class="quest-card side">
@@ -750,7 +775,7 @@ body::before{content:'';position:fixed;inset:0;background:repeating-linear-gradi
     <div class="quest-desc">Build Margot Molds email list to 500 subscribers.</div>
     <div class="quest-reward">🪙 +500 XP ON COMPLETION</div>
     <div class="prog-label"><span>SUBSCRIBERS</span><span id="email-quest-label">60 / 500</span></div>
-    <div class="prog-bar"><div class="prog-fill" style="background:var(--accent3);" id="email-quest-bar"></div></div>
+    <div class="prog-bar"><div class="prog-fill" style="background:var(--purple);" id="email-quest-bar"></div></div>
   </div>
   <div class="quest-card side">
     <div class="quest-type qt-s">◆ SIDE QUEST</div>
@@ -766,14 +791,14 @@ body::before{content:'';position:fixed;inset:0;background:repeating-linear-gradi
     <div class="quest-desc">Close 1 sale every day for 7 consecutive days.</div>
     <div class="quest-reward">🪙 +400 XP ON COMPLETION</div>
     <div class="prog-label"><span>CONSECUTIVE SALE DAYS</span><span id="close-streak-label">0 / 7</span></div>
-    <div class="prog-bar"><div class="prog-fill" style="background:var(--accent2);" id="close-streak-bar"></div></div>
+    <div class="prog-bar"><div class="prog-fill" style="background:var(--orange);" id="close-streak-bar"></div></div>
   </div>
   <div class="quest-card locked">
     <div class="quest-type qt-l">🔒 LOCKED</div>
     <div class="quest-title">Your Own Venture</div>
     <div class="quest-desc">Start your own business using everything learned from Margot Molds.</div>
     <div class="quest-reward">🪙 REWARD: The life you actually want</div>
-    <div class="prog-bar"><div class="prog-fill" style="background:var(--accent3);width:0%"></div></div>
+    <div class="prog-bar"><div class="prog-fill" style="background:var(--purple);width:0%"></div></div>
   </div>
   <div class="section-title" style="margin-top:4px;">🗺️ Roadmap</div>
   <div class="timeline">
@@ -811,7 +836,7 @@ body::before{content:'';position:fixed;inset:0;background:repeating-linear-gradi
       <div class="boss-item">🔧 Workshop</div><div class="boss-item">👨‍👩‍👧‍👦 Family of 6</div><div class="boss-item">🌎 Live anywhere</div>
     </div>
   </div>
-  <div class="mantra"><div class="mantra-text">YOU'RE NOT LOST. <span>YOU'RE LOADING.</span><br>THE COUCH IS TEMPORARY. <span>THE MISSION IS NOT.</span></div></div>
+  <div class="mantra"><div class="mantra-text"><span>PROCRASTINATION</span> IS THE <span>ASSASSINATION</span><br>OF YOUR <span>DESTINATION</span></div></div>
 </div>
 </div>
 
@@ -853,7 +878,7 @@ const SESSIONS={
   gym:{name:'Workout',icon:'🏋️',xp:50,color:'pink',skill:'fitness'},
   recovery:{name:'Active Recovery',icon:'🏄',xp:25,color:'blue',skill:'mental'},
   build:{name:'Build Something',icon:'🔧',xp:55,color:'gold',skill:'build'},
-  relationship:{name:'Quality Time',icon:'💕',xp:30,color:'red',skill:'mental'}
+  relationship:{name:'Quality Time',icon:'💕',xp:30,color:'rose',skill:'mental'}
 };
 const LEVELS=[0,500,1200,2200,3500,5000,7000,9500,12500,16000,20000,25000,31000,38000,46000,55000];
 const TITLES=['THE STARTER','THE GRINDER','THE BUILDER','THE CLOSER','THE HUSTLER','THE OPERATOR','THE STRATEGIST','THE ENTREPRENEUR','THE CREATOR','THE FOUNDER','THE INVESTOR','THE VISIONARY','THE FREE MAN','THE LEGACY','THE LEGEND','THE GODFATHER'];
@@ -874,7 +899,7 @@ const ACHIEVEMENTS=[
   {id:'combo_3',icon:'🎯',name:'Triple Threat',check:s=>getDayCats(s)>=3},
   {id:'xp_1000',icon:'🏅',name:'XP Collector',check:s=>s.totalXP>=1000},
   {id:'xp_5000',icon:'🏆',name:'XP Hunter',check:s=>s.totalXP>=5000},
-  {id:'debt_free',icon:'🆓',name:'Debt Free',check:s=>(s.trackers.apple+s.trackers.amex+s.trackers.loans)===0&&s.trackers.apple===0&&s.trackers.debtSet},
+  {id:'debt_free',icon:'🆓',name:'Debt Free',check:s=>(s.debts||[]).length>0&&(s.debts||[]).every(d=>d.amount===0)},
   {id:'saver_10k',icon:'💰',name:'$10k Saver',check:s=>s.trackers.savings>=10000},
   {id:'notebook_10',icon:'📓',name:'Note Taker',check:s=>s.quotes.length+s.ideas.length>=10},
   {id:'lover',icon:'💕',name:'Long Distance Hero',check:s=>s.log.filter(l=>l.type==='relationship').length>=7},
@@ -1027,6 +1052,75 @@ function punchIn(type){
 }
 
 // ============ TRACKERS ============
+// ============ DEBT MANAGEMENT ============
+function addDebt(){
+  const name=document.getElementById('new-debt-name').value.trim();
+  const amount=parseFloat(document.getElementById('new-debt-amount').value)||0;
+  const icon=document.getElementById('new-debt-icon').value;
+  if(!name||!amount)return;
+  const state=getState();
+  if(!state.debts)state.debts=[];
+  state.debts.push({id:Date.now(),name,amount,original:amount,icon});
+  document.getElementById('new-debt-name').value='';
+  document.getElementById('new-debt-amount').value='';
+  saveState(state);renderAll();haptic();showToast(0,'DEBT ADDED');
+}
+
+function saveDebt(id){
+  const state=getState();
+  if(!state.debts)state.debts=[];
+  const debt=state.debts.find(d=>d.id===id);
+  if(!debt)return;
+  const input=document.getElementById('debt-edit-'+id);
+  if(!input)return;
+  const newVal=parseFloat(input.value);
+  if(isNaN(newVal)||newVal<0)return;
+  debt.amount=newVal;
+  if(newVal===0)setTimeout(()=>showToast(0,'💪 DEBT CLEARED!'),100);
+  saveState(state);renderAll();haptic();
+}
+
+function deleteDebt(id){
+  if(!confirm('Remove this debt?'))return;
+  const state=getState();
+  state.debts=(state.debts||[]).filter(d=>d.id!==id);
+  saveState(state);renderAll();haptic();
+}
+
+function renderDebtList(){
+  const state=getState();
+  if(!state.debts)state.debts=[
+    {id:1,name:'Apple Card',amount:3217.62,original:3217.62,icon:'💳'},
+    {id:2,name:'Amex',amount:1980.48,original:1980.48,icon:'💳'},
+    {id:3,name:'Student Loans',amount:0,original:0,icon:'🎓'},
+  ];
+  const el=document.getElementById('debt-list');
+  if(!el)return;
+  const total=state.debts.reduce((s,d)=>s+d.amount,0);
+  const totalOrig=state.debts.reduce((s,d)=>s+d.original,0);
+  const paidOff=Math.max(0,totalOrig-total);
+  setEl('total-debt','$'+total.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g,','));
+  setEl('debt-paid-label','$'+paidOff.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g,',')+' paid off');
+  const totalBar=document.getElementById('total-debt-bar');
+  if(totalBar)totalBar.style.width=totalOrig>0?Math.min(100,(total/totalOrig)*100)+'%':'0%';
+  el.innerHTML=state.debts.map(d=>{
+    const pct=d.original>0?Math.min(100,(d.amount/d.original)*100):0;
+    return`<div class="debt-card">
+      <div class="debt-card-icon">${d.icon}</div>
+      <div class="debt-card-body">
+        <div class="debt-card-name">${d.name}</div>
+        <div class="debt-card-amount">$${d.amount.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g,',')}</div>
+        <div class="debt-card-bar-bg"><div class="debt-card-bar-fill" style="width:${pct}%"></div></div>
+      </div>
+      <div class="debt-card-actions">
+        <input class="debt-edit-input" id="debt-edit-${d.id}" type="number" value="${d.amount}" placeholder="New balance">
+        <button class="debt-save-btn" onclick="saveDebt(${d.id})">UPDATE</button>
+        <button class="debt-del-btn" onclick="deleteDebt(${d.id})">REMOVE</button>
+      </div>
+    </div>`;
+  }).join('');
+}
+
 function updateSavings(){
   const state=getState();
   const val=parseFloat(document.getElementById('savings-input').value)||0;
@@ -1034,15 +1128,7 @@ function updateSavings(){
   document.getElementById('savings-input').value='';
   saveState(state);checkAchievements(state);renderAll();haptic();showToast(0,'SAVINGS UPDATED');
 }
-function updateDebt(type){
-  const state=getState();
-  const inputMap={apple:'apple-input',amex:'amex-input',loans:'loans-input'};
-  const val=parseFloat(document.getElementById(inputMap[type]).value)||0;
-  state.trackers[type]=val;
-  state.trackers.debtSet=true;
-  document.getElementById(inputMap[type]).value='';
-  saveState(state);checkAchievements(state);renderAll();haptic();showToast(0,'DEBT UPDATED');
-}
+
 function updateRevenue(){
   const state=getState();
   const val=parseFloat(document.getElementById('rev-input').value)||0;
@@ -1170,6 +1256,103 @@ function renderTodos(){
     </div>`).join('');
 }
 
+// ============ SESSION EDITING ============
+function toggleEditSession(i){
+  const area=document.getElementById('edit-'+i);
+  if(!area)return;
+  area.classList.toggle('open');
+  if(area.classList.contains('open')){
+    const ta=document.getElementById('note-'+i);
+    if(ta)ta.focus();
+  }
+}
+
+function saveSessionNote(ts){
+  const state=getState();
+  const logEntry=state.log.find(l=>l.timestamp===ts);
+  if(!logEntry)return;
+  // Find the textarea - search by data or by scanning open edit areas
+  const areas=document.querySelectorAll('.log-edit-area.open textarea');
+  let note='';
+  areas.forEach(ta=>{note=ta.value.trim();});
+  logEntry.note=note;
+  saveState(state);
+  showToast(0,'NOTE SAVED');
+  haptic();
+  renderAll();
+}
+
+function deleteSession(ts, isAppt){
+  if(!confirm('Remove this session? XP and stats will be updated.'))return;
+  const state=getState();
+
+  if(isAppt){
+    // Find appointment by timestamp
+    const appt=state.appointments.find(a=>a.timestamp===ts);
+    if(!appt)return;
+    // Deduct XP
+    state.totalXP=Math.max(0,state.totalXP-(appt.sale?75:15));
+    // Remove it
+    state.appointments=state.appointments.filter(a=>a.timestamp!==ts);
+    // Recalculate sale streak
+    state.closeSaleStreak=calcCloseSaleStreak(state);
+  } else {
+    // Find log entry by timestamp
+    const logEntry=state.log.find(l=>l.timestamp===ts);
+    if(!logEntry)return;
+    // Deduct XP
+    state.totalXP=Math.max(0,state.totalXP-logEntry.xp);
+    // Reverse skill
+    const skillMap={store:'ecom',knowledge:'strategy',gym:'fitness',recovery:'mental',build:'build',relationship:'mental'};
+    const skillKey=skillMap[logEntry.type];
+    if(skillKey&&state.skills[skillKey]!==undefined)
+      state.skills[skillKey]=Math.max(0,state.skills[skillKey]-2);
+    // Remove from log
+    state.log=state.log.filter(l=>l.timestamp!==ts);
+    // Fix todaySessions count
+    const today=getToday();
+    if(logEntry.date===today){
+      state.todaySessions[logEntry.type]=Math.max(0,(state.todaySessions[logEntry.type]||1)-1);
+    }
+    // Recalculate streaks for this type
+    state.streaks[logEntry.type]=calcStreak(state,logEntry.type);
+    state.bestStreak=Math.max(0,...Object.values(state.streaks));
+  }
+
+  saveState(state);
+  showToast(0,'SESSION REMOVED');
+  haptic();
+  renderAll();
+}
+
+function calcCloseSaleStreak(state){
+  // Count consecutive days with at least one sale going backwards from most recent
+  const saleDates=[...new Set(state.appointments.filter(a=>a.sale).map(a=>a.date))].sort().reverse();
+  if(!saleDates.length)return 0;
+  let streak=0;
+  let check=saleDates[0];
+  for(let i=0;i<saleDates.length;i++){
+    if(saleDates[i]===check){streak++;const d=new Date(check);d.setDate(d.getDate()-1);check=d.toISOString().slice(0,10);}
+    else break;
+  }
+  return streak;
+}
+
+function calcStreak(state,type){
+  const dates=[...new Set(state.log.filter(l=>l.type===type).map(l=>l.date))].sort().reverse();
+  if(!dates.length)return 0;
+  const today=getToday();
+  const yd=new Date();yd.setDate(yd.getDate()-1);
+  const ydStr=yd.toISOString().slice(0,10);
+  if(dates[0]!==today&&dates[0]!==ydStr)return 0;
+  let streak=0,check=dates[0];
+  for(let i=0;i<dates.length;i++){
+    if(dates[i]===check){streak++;const d=new Date(check);d.setDate(d.getDate()-1);check=d.toISOString().slice(0,10);}
+    else break;
+  }
+  return streak;
+}
+
 // ============ RENDER ============
 function renderAll(){
   const state=getState();
@@ -1254,7 +1437,7 @@ function renderAll(){
   const gb=document.getElementById('goal-status');
   if(gb)gb.className='goal-status '+(goalMet?'c-green':'c-red');
   const gBanner=document.getElementById('daily-goal-banner');
-  if(gBanner)gBanner.style.borderLeft=goalMet?'3px solid var(--accent)':'3px solid var(--red)';
+  if(gBanner)gBanner.style.borderLeft=goalMet?'3px solid var(--green)':'3px solid var(--red)';
 
   // Appointment dots
   const dotsEl=document.getElementById('appt-dots');
@@ -1300,20 +1483,8 @@ function renderAll(){
   if(sb1)sb1.style.width=savingsPct+'%';if(sb2)sb2.style.width=savingsPct+'%';
 
   // Debt
-  const apple=state.trackers.apple||0;
-  const amex=state.trackers.amex||0;
-  const loans=state.trackers.loans||0;
-  const totalDebt=apple+amex+loans;
-  setEl('apple-amount','$'+apple.toLocaleString());
-  setEl('amex-amount','$'+amex.toLocaleString());
-  setEl('loans-amount','$'+loans.toLocaleString());
-  setEl('total-debt','$'+totalDebt.toFixed(2));
-  const appleOrig=state.trackers.appleOrig||3217.62;
-  const amexOrig=state.trackers.amexOrig||1980.48;
-  const loansOrig=state.trackers.loansOrig||1;
-  const appleBar=document.getElementById('apple-bar');if(appleBar)appleBar.style.width=Math.min(100,(apple/appleOrig)*100)+'%';
-  const amexBar=document.getElementById('amex-bar');if(amexBar)amexBar.style.width=Math.min(100,(amex/amexOrig)*100)+'%';
-  const loansBar=document.getElementById('loans-bar');if(loansBar)loansBar.style.width=loans>0?Math.min(100,(loans/loansOrig)*100)+'%':'0%';
+  // debt rendered by renderDebtList()
+  const totalDebt=(state.debts||[]).reduce((s,d)=>s+d.amount,0);
 
   // Revenue & emails
   const rev=state.trackers.revenue||0;
@@ -1331,7 +1502,7 @@ function renderAll(){
   const eqb=document.getElementById('email-quest-bar');if(eqb)eqb.style.width=Math.min(100,(emails/500)*100)+'%';
   setEl('rev-quest-label','$'+rev.toLocaleString()+' / $10k');
   const rqb=document.getElementById('rev-quest-bar');if(rqb)rqb.style.width=Math.min(100,(rev/10000)*100)+'%';
-  const initDebt=3217.62+1980.48;
+  const initDebt=(state.debts||[]).reduce((s,d)=>s+d.original,0)||5198.10;
   const debtPct=initDebt>0?Math.max(0,Math.min(100,(1-(totalDebt/initDebt))*100)):100;
   setEl('debt-quest-pct',debtPct.toFixed(0)+'%');
   const dqb=document.getElementById('debt-quest-bar');if(dqb)dqb.style.width=debtPct+'%';
@@ -1385,18 +1556,43 @@ function renderAll(){
 
   // Log
   setEl('log-count',state.log.length+' SESSIONS');
+  renderDebtList();
   renderTodos();
   const logList=document.getElementById('log-list');
   if(logList){
-    const allEntries=[
-      ...state.appointments.map(a=>({icon:a.sale?'✅':'❌',name:a.sale?'Termite Sale — $'+a.value.toLocaleString():'No Sale',xp:a.sale?75:15,timestamp:a.timestamp,note:'',date:a.date})),
-      ...state.log
+    window._logEntries=[
+      ...state.appointments.map((a,i)=>({icon:a.sale?'✅':'❌',name:a.sale?'Termite Sale — $'+a.value.toLocaleString():'No Sale',xp:a.sale?75:15,timestamp:a.timestamp,note:a.note||'',date:a.date,isAppt:true,apptIndex:i})),
+      ...state.log.map((l,i)=>({...l,isAppt:false,logIndex:i}))
     ].sort((a,b)=>new Date(b.timestamp)-new Date(a.timestamp));
+    const allEntries=window._logEntries;
     if(!allEntries.length){logList.innerHTML='<div class="empty-state">// NO SESSIONS YET<br><br>START PUNCHING IN</div>';}
-    else{logList.innerHTML=allEntries.slice(0,100).map(e=>{
+    else{logList.innerHTML=allEntries.slice(0,100).map((e,i)=>{
       const dt=new Date(e.timestamp);
       const time=dt.toLocaleDateString('en-US',{month:'short',day:'numeric'})+' · '+dt.toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit'});
-      return`<div class="log-item"><div class="log-icon-el">${e.icon}</div><div class="log-body"><div class="log-name-el">${e.name}</div>${e.note?`<div class="log-note-el">"${e.note}"</div>`:''}<div class="log-time-el">${time}</div></div><div class="log-xp-el">+${e.xp}</div></div>`;
+      const isAppt=e.isAppt;
+      const safeTs=e.timestamp.replace(/[^0-9T:.Z-]/g,'');
+      const editId='edit-'+i;
+      return`<div class="log-item" id="logitem-${i}">
+        <div class="log-icon-el">${e.icon}</div>
+        <div class="log-body" style="width:100%;">
+          <div style="display:flex;align-items:flex-start;justify-content:space-between;">
+            <div>
+              <div class="log-name-el">${e.name}</div>
+              ${e.note?`<div class="log-note-el">"${e.note}"</div>`:''}
+              <div class="log-time-el">${time}</div>
+            </div>
+            <div class="log-xp-el">+${e.xp}</div>
+          </div>
+          <div class="log-item-actions">
+            ${!e.isAppt?`<button class="log-action-btn" onclick="toggleEditSession(${i})">✏️ NOTE</button>`:''}
+            <button class="log-action-btn danger" onclick="deleteSession('${safeTs}',${e.isAppt})">🗑 REMOVE</button>
+          </div>
+          ${!e.isAppt?`<div class="log-edit-area" id="${editId}">
+            <textarea class="log-edit-input" id="note-${i}" placeholder="Add or edit note...">${e.note||''}</textarea>
+            <button class="log-edit-save" onclick="saveSessionNote('${safeTs}')">SAVE NOTE</button>
+          </div>`:''}
+        </div>
+      </div>`;
     }).join('');}
   }
 }
