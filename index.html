@@ -304,6 +304,15 @@ body::before{content:'';position:fixed;inset:0;background:repeating-linear-gradi
 .todo-count{font-family:'Space Mono',monospace;font-size:9px;color:var(--text-dim);}
 
 
+/* HOUR LOGGING */
+.hour-input-row{display:flex;gap:4px;margin-bottom:6px;}
+.hour-quick-btn{flex:1;padding:7px 2px;border-radius:8px;border:1px solid var(--border);background:var(--bg3);color:var(--text-mid);font-family:'Space Mono',monospace;font-size:9px;cursor:pointer;transition:all 0.15s;letter-spacing:0;}
+.hour-quick-btn:active{transform:scale(0.93);background:var(--bg2);}
+.hour-quick-btn:hover{border-color:var(--text-mid);color:var(--text);}
+.hour-custom-row{display:flex;gap:6px;margin-bottom:6px;}
+.hour-input{flex:1;background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:8px 10px;font-family:'Space Mono',monospace;font-size:11px;color:var(--text);}
+.hour-input:focus{outline:none;border-color:var(--purple);}
+
 /* SESSION EDIT */
 .log-item{position:relative;}
 .log-item-actions{display:flex;gap:6px;margin-top:8px;}
@@ -343,6 +352,7 @@ body::before{content:'';position:fixed;inset:0;background:repeating-linear-gradi
     <div class="header-tag">// LIFE OS v4.0</div>
     <h1>CAIO.EXE</h1>
     <div class="header-sub" id="today-date">LOADING...</div>
+    <div style="margin-top:10px;font-family:'Bebas Neue',cursive;font-size:clamp(13px,3.5vw,18px);letter-spacing:2px;color:var(--text-dim);line-height:1.4;"><span style="color:var(--green);">PROCRASTINATION</span> IS THE <span style="color:var(--red);">ASSASSINATION</span><br>OF YOUR <span style="color:var(--gold);">DESTINATION</span></div>
   </div>
   <div class="card fade-up" style="position:relative;">
     <div class="top-bar" style="background:linear-gradient(90deg,var(--purple),var(--green),var(--blue));"></div>
@@ -538,71 +548,140 @@ body::before{content:'';position:fixed;inset:0;background:repeating-linear-gradi
 <div class="page" id="page-punchin">
 <div class="container">
   <div class="header">
-    <div class="header-tag">// LOG YOUR SESSION</div>
-    <h1>PUNCH IN</h1>
-    <div class="header-sub">EVERY REP COUNTS</div>
+    <div class="header-tag">// LOG YOUR HOURS</div>
+    <h1>TIME LOG</h1>
+    <div class="header-sub">HOURS IN = XP OUT</div>
   </div>
+
+  <div class="card" style="padding:14px;margin-bottom:16px;text-align:center;">
+    <div style="font-family:'Space Mono',monospace;font-size:9px;color:var(--text-dim);letter-spacing:2px;margin-bottom:4px;">TOTAL HOURS LOGGED TODAY</div>
+    <div style="font-family:'Bebas Neue',cursive;font-size:48px;color:var(--green);line-height:1;" id="today-hours-total">0h</div>
+    <div style="font-family:'Space Mono',monospace;font-size:9px;color:var(--text-dim);margin-top:4px;" id="today-xp-from-hours">+0 XP earned today</div>
+  </div>
+
   <div class="section-title">🏪 Business</div>
   <div class="punchin-grid">
     <div class="punchin-card border-green">
-      <span class="pi-icon">🏪</span><div class="pi-name">Margot Molds</div>
+      <span class="pi-icon">🏪</span>
+      <div class="pi-name">Margot Molds</div>
       <div class="pi-desc">Store, social, email, content. Building the asset.</div>
-      <div class="pi-xp-badge bg-green c-green">+60 XP</div>
+      <div class="pi-xp-badge bg-green c-green">60 XP / HR</div>
       <div class="streak-row"><span class="streak-label">🔥 STREAK</span><span class="streak-val" id="s-store">0</span></div>
-      <div class="dots" id="d-store"></div>
+      <div style="font-family:'Space Mono',monospace;font-size:9px;color:var(--text-dim);margin-bottom:4px;">TODAY: <span class="c-green" id="h-store">0h</span></div>
+      <div class="hour-input-row">
+        <button class="hour-quick-btn" onclick="quickLog('store',0.5)">30m</button>
+        <button class="hour-quick-btn" onclick="quickLog('store',1)">1h</button>
+        <button class="hour-quick-btn" onclick="quickLog('store',2)">2h</button>
+        <button class="hour-quick-btn" onclick="quickLog('store',3)">3h</button>
+      </div>
+      <div class="hour-custom-row">
+        <input class="hour-input" id="hi-store" type="number" step="0.5" min="0.5" max="16" placeholder="Custom hrs">
+        <button class="pi-btn btn-green" onclick="logHours('store')">LOG</button>
+      </div>
       <textarea class="note-input" id="n-store" placeholder="Add a note..."></textarea>
-      <button class="pi-btn btn-green" id="b-store" onclick="punchIn('store')">PUNCH IN</button>
     </div>
     <div class="punchin-card border-purple">
-      <span class="pi-icon">📚</span><div class="pi-name">Study Session</div>
+      <span class="pi-icon">📚</span>
+      <div class="pi-name">Study Session</div>
       <div class="pi-desc">Book, podcast, notes. Hormozi, business, marketing.</div>
-      <div class="pi-xp-badge bg-purple c-purple">+40 XP</div>
+      <div class="pi-xp-badge bg-purple c-purple">50 XP / HR</div>
       <div class="streak-row"><span class="streak-label">🔥 STREAK</span><span class="streak-val" id="s-knowledge">0</span></div>
-      <div class="dots" id="d-knowledge"></div>
+      <div style="font-family:'Space Mono',monospace;font-size:9px;color:var(--text-dim);margin-bottom:4px;">TODAY: <span class="c-purple" id="h-knowledge">0h</span></div>
+      <div class="hour-input-row">
+        <button class="hour-quick-btn" onclick="quickLog('knowledge',0.5)">30m</button>
+        <button class="hour-quick-btn" onclick="quickLog('knowledge',1)">1h</button>
+        <button class="hour-quick-btn" onclick="quickLog('knowledge',2)">2h</button>
+        <button class="hour-quick-btn" onclick="quickLog('knowledge',3)">3h</button>
+      </div>
+      <div class="hour-custom-row">
+        <input class="hour-input" id="hi-knowledge" type="number" step="0.5" min="0.5" max="16" placeholder="Custom hrs">
+        <button class="pi-btn btn-purple" onclick="logHours('knowledge')">LOG</button>
+      </div>
       <textarea class="note-input" id="n-knowledge" placeholder="What did you learn?"></textarea>
-      <button class="pi-btn btn-purple" id="b-knowledge" onclick="punchIn('knowledge')">PUNCH IN</button>
     </div>
   </div>
+
   <div class="section-title">💪 Health</div>
   <div class="punchin-grid">
     <div class="punchin-card border-pink">
-      <span class="pi-icon">🏋️</span><div class="pi-name">Workout</div>
+      <span class="pi-icon">🏋️</span>
+      <div class="pi-name">Workout</div>
       <div class="pi-desc">Gym, run, bodyweight. Strong body = strong mind.</div>
-      <div class="pi-xp-badge bg-pink c-pink">+50 XP</div>
+      <div class="pi-xp-badge bg-pink c-pink">40 XP / HR</div>
       <div class="streak-row"><span class="streak-label">🔥 STREAK</span><span class="streak-val" id="s-gym">0</span></div>
-      <div class="dots" id="d-gym"></div>
+      <div style="font-family:'Space Mono',monospace;font-size:9px;color:var(--text-dim);margin-bottom:4px;">TODAY: <span class="c-pink" id="h-gym">0h</span></div>
+      <div class="hour-input-row">
+        <button class="hour-quick-btn" onclick="quickLog('gym',0.5)">30m</button>
+        <button class="hour-quick-btn" onclick="quickLog('gym',1)">1h</button>
+        <button class="hour-quick-btn" onclick="quickLog('gym',1.5)">1.5h</button>
+        <button class="hour-quick-btn" onclick="quickLog('gym',2)">2h</button>
+      </div>
+      <div class="hour-custom-row">
+        <input class="hour-input" id="hi-gym" type="number" step="0.5" min="0.5" max="16" placeholder="Custom hrs">
+        <button class="pi-btn btn-pink" onclick="logHours('gym')">LOG</button>
+      </div>
       <textarea class="note-input" id="n-gym" placeholder="What did you train?"></textarea>
-      <button class="pi-btn btn-pink" id="b-gym" onclick="punchIn('gym')">PUNCH IN</button>
     </div>
     <div class="punchin-card border-blue">
-      <span class="pi-icon">🏄</span><div class="pi-name">Active Recovery</div>
+      <span class="pi-icon">🏄</span>
+      <div class="pi-name">Active Recovery</div>
       <div class="pi-desc">Surf, walk, stretch, meditate.</div>
-      <div class="pi-xp-badge bg-blue c-blue">+25 XP</div>
+      <div class="pi-xp-badge bg-blue c-blue">25 XP / HR</div>
       <div class="streak-row"><span class="streak-label">🔥 STREAK</span><span class="streak-val" id="s-recovery">0</span></div>
-      <div class="dots" id="d-recovery"></div>
+      <div style="font-family:'Space Mono',monospace;font-size:9px;color:var(--text-dim);margin-bottom:4px;">TODAY: <span class="c-blue" id="h-recovery">0h</span></div>
+      <div class="hour-input-row">
+        <button class="hour-quick-btn" onclick="quickLog('recovery',0.5)">30m</button>
+        <button class="hour-quick-btn" onclick="quickLog('recovery',1)">1h</button>
+        <button class="hour-quick-btn" onclick="quickLog('recovery',1.5)">1.5h</button>
+        <button class="hour-quick-btn" onclick="quickLog('recovery',2)">2h</button>
+      </div>
+      <div class="hour-custom-row">
+        <input class="hour-input" id="hi-recovery" type="number" step="0.5" min="0.5" max="16" placeholder="Custom hrs">
+        <button class="pi-btn btn-blue" onclick="logHours('recovery')">LOG</button>
+      </div>
       <textarea class="note-input" id="n-recovery" placeholder="Add a note..."></textarea>
-      <button class="pi-btn btn-blue" id="b-recovery" onclick="punchIn('recovery')">PUNCH IN</button>
     </div>
   </div>
+
   <div class="section-title">🔧 Creation & Life</div>
   <div class="punchin-grid">
     <div class="punchin-card border-gold">
-      <span class="pi-icon">🔧</span><div class="pi-name">Build Something</div>
+      <span class="pi-icon">🔧</span>
+      <div class="pi-name">Build Something</div>
       <div class="pi-desc">Workshop, prototypes, mold designs, woodwork.</div>
-      <div class="pi-xp-badge bg-gold c-gold">+55 XP</div>
+      <div class="pi-xp-badge bg-gold c-gold">70 XP / HR</div>
       <div class="streak-row"><span class="streak-label">🔥 STREAK</span><span class="streak-val" id="s-build">0</span></div>
-      <div class="dots" id="d-build"></div>
+      <div style="font-family:'Space Mono',monospace;font-size:9px;color:var(--text-dim);margin-bottom:4px;">TODAY: <span class="c-gold" id="h-build">0h</span></div>
+      <div class="hour-input-row">
+        <button class="hour-quick-btn" onclick="quickLog('build',0.5)">30m</button>
+        <button class="hour-quick-btn" onclick="quickLog('build',1)">1h</button>
+        <button class="hour-quick-btn" onclick="quickLog('build',2)">2h</button>
+        <button class="hour-quick-btn" onclick="quickLog('build',3)">3h</button>
+      </div>
+      <div class="hour-custom-row">
+        <input class="hour-input" id="hi-build" type="number" step="0.5" min="0.5" max="16" placeholder="Custom hrs">
+        <button class="pi-btn btn-gold" onclick="logHours('build')">LOG</button>
+      </div>
       <textarea class="note-input" id="n-build" placeholder="What did you build?"></textarea>
-      <button class="pi-btn btn-gold" id="b-build" onclick="punchIn('build')">PUNCH IN</button>
     </div>
     <div class="punchin-card border-rose">
-      <span class="pi-icon">💕</span><div class="pi-name">Quality Time</div>
+      <span class="pi-icon">💕</span>
+      <div class="pi-name">Quality Time</div>
       <div class="pi-desc">Called her, planned something. Long distance takes effort.</div>
-      <div class="pi-xp-badge bg-rose c-rose">+30 XP</div>
+      <div class="pi-xp-badge bg-rose c-rose">30 XP / HR</div>
       <div class="streak-row"><span class="streak-label">🔥 STREAK</span><span class="streak-val" id="s-relationship">0</span></div>
-      <div class="dots" id="d-relationship"></div>
+      <div style="font-family:'Space Mono',monospace;font-size:9px;color:var(--text-dim);margin-bottom:4px;">TODAY: <span class="c-rose" id="h-relationship">0h</span></div>
+      <div class="hour-input-row">
+        <button class="hour-quick-btn" onclick="quickLog('relationship',0.5)">30m</button>
+        <button class="hour-quick-btn" onclick="quickLog('relationship',1)">1h</button>
+        <button class="hour-quick-btn" onclick="quickLog('relationship',2)">2h</button>
+        <button class="hour-quick-btn" onclick="quickLog('relationship',3)">3h</button>
+      </div>
+      <div class="hour-custom-row">
+        <input class="hour-input" id="hi-relationship" type="number" step="0.5" min="0.5" max="16" placeholder="Custom hrs">
+        <button class="pi-btn btn-rose" onclick="logHours('relationship')">LOG</button>
+      </div>
       <textarea class="note-input" id="n-relationship" placeholder="Add a note..."></textarea>
-      <button class="pi-btn btn-red" id="b-relationship" onclick="punchIn('relationship')">PUNCH IN</button>
     </div>
   </div>
 </div>
@@ -893,7 +972,7 @@ const ACHIEVEMENTS=[
   {id:'iron_body',icon:'💪',name:'Iron Body',check:s=>s.log.filter(l=>l.type==='gym').length>=10},
   {id:'scholar',icon:'📚',name:'The Scholar',check:s=>s.log.filter(l=>l.type==='knowledge').length>=10},
   {id:'inventor',icon:'🔧',name:'Inventor Awakened',check:s=>s.log.filter(l=>l.type==='build').length>=1},
-  {id:'streak_7',icon:'⚡',name:'On Fire',check:s=>Math.max(0,...Object.values(s.streaks))>=7},
+  {id:'streak_7',icon:'⚡',name:'On Fire',check:s=>(Object.values(s.streaks||{}).length?streakMax(s.streaks):0)>=7},
   {id:'level_5',icon:'🌟',name:'Rising Star',check:s=>getLevel(s.totalXP)>=5},
   {id:'level_10',icon:'💎',name:'Diamond Hands',check:s=>getLevel(s.totalXP)>=10},
   {id:'combo_3',icon:'🎯',name:'Triple Threat',check:s=>getDayCats(s)>=3},
@@ -904,40 +983,71 @@ const ACHIEVEMENTS=[
   {id:'notebook_10',icon:'📓',name:'Note Taker',check:s=>s.quotes.length+s.ideas.length>=10},
   {id:'lover',icon:'💕',name:'Long Distance Hero',check:s=>s.log.filter(l=>l.type==='relationship').length>=7},
 ];
+function dayHours(s,t,type){return(s.hoursLog&&s.hoursLog[t]&&s.hoursLog[t][type])||0;}
 const DAILY_CHALLENGES=[
   {id:'dc_termite',icon:'🐛',title:'Closer',desc:'Close at least 1 termite sale today',xp:60,check:(s,t)=>s.appointments.some(a=>a.sale&&a.date===t)},
-  {id:'dc_double_close',icon:'💰',title:'Double Closer',desc:'Close 2+ termite sales today',xp:120,check:(s,t)=>s.appointments.filter(a=>a.sale&&a.date===t).length>=2},
-  {id:'dc_store',icon:'🏪',title:'Store Day',desc:'Work on Margot Molds today',xp:50,check:(s,t)=>s.log.some(l=>l.date===t&&l.type==='store')},
-  {id:'dc_gym',icon:'💪',title:'No Days Off',desc:'Get a workout in today',xp:60,check:(s,t)=>s.log.some(l=>l.date===t&&l.type==='gym')},
-  {id:'dc_grind',icon:'🔥',title:'Full Grind',desc:'Log termite appts AND work on the store',xp:100,check:(s,t)=>s.appointments.some(a=>a.date===t)&&s.log.some(l=>l.date===t&&l.type==='store')},
-  {id:'dc_triple',icon:'🎯',title:'Triple Threat',desc:'Log 3 different categories today',xp:150,check:(s,t)=>getDayCats(s,t)>=3},
-  {id:'dc_knowledge',icon:'📚',title:'Student',desc:'Log a study session today',xp:50,check:(s,t)=>s.log.some(l=>l.date===t&&l.type==='knowledge')},
-  {id:'dc_build',icon:'🔧',title:'Maker',desc:'Build something today',xp:70,check:(s,t)=>s.log.some(l=>l.date===t&&l.type==='build')},
-  {id:'dc_all',icon:'🚀',title:'Full Send',desc:'Close a sale AND work on store AND workout',xp:250,check:(s,t)=>s.appointments.some(a=>a.sale&&a.date===t)&&s.log.some(l=>l.date===t&&l.type==='store')&&s.log.some(l=>l.date===t&&l.type==='gym')},
+  {id:'dc_double_close',icon:'💰',title:'Double Closer',desc:'Close 2 termite sales today',xp:120,check:(s,t)=>s.appointments.filter(a=>a.sale&&a.date===t).length>=2},
+  {id:'dc_store_1h',icon:'🏪',title:'Store Hour',desc:'Log 1+ hour on Margot Molds',xp:60,check:(s,t)=>dayHours(s,t,'store')>=1},
+  {id:'dc_store_3h',icon:'🏪',title:'Store Grind',desc:'Log 3+ hours on Margot Molds',xp:120,check:(s,t)=>dayHours(s,t,'store')>=3},
+  {id:'dc_gym_1h',icon:'💪',title:'No Days Off',desc:'Log 1+ hour of working out',xp:60,check:(s,t)=>dayHours(s,t,'gym')>=1},
+  {id:'dc_study_1h',icon:'📚',title:'Student',desc:'Log 1+ hour of studying',xp:60,check:(s,t)=>dayHours(s,t,'knowledge')>=1},
+  {id:'dc_study_2h',icon:'📚',title:'Deep Study',desc:'Log 2+ hours of studying',xp:100,check:(s,t)=>dayHours(s,t,'knowledge')>=2},
+  {id:'dc_build_1h',icon:'🔧',title:'Maker',desc:'Log 1+ hour building something',xp:70,check:(s,t)=>dayHours(s,t,'build')>=1},
+  {id:'dc_3cats',icon:'🎯',title:'Triple Threat',desc:'Log time in 3 different categories',xp:100,check:(s,t)=>getDayCats(s,t)>=3},
+  {id:'dc_5hrs',icon:'⚡',title:'5 Hour Day',desc:'Log 5+ total hours across all activities',xp:120,check:(s,t)=>{const h=(s.hoursLog&&s.hoursLog[t])||{};return Object.values(h).reduce((a,b)=>a+b,0)>=5;}},
+  {id:'dc_grind',icon:'🔥',title:'Full Grind',desc:'Close a sale AND log 1h+ on Margot Molds',xp:150,check:(s,t)=>s.appointments.some(a=>a.sale&&a.date===t)&&dayHours(s,t,'store')>=1},
+  {id:'dc_mind_body',icon:'🧠',title:'Mind & Body',desc:'Log 1h+ study AND 1h+ workout',xp:130,check:(s,t)=>dayHours(s,t,'knowledge')>=1&&dayHours(s,t,'gym')>=1},
+  {id:'dc_recovery',icon:'🏄',title:'Recharge',desc:'Log any active recovery time',xp:40,check:(s,t)=>dayHours(s,t,'recovery')>0},
+  {id:'dc_8hrs',icon:'🚀',title:'Full Send',desc:'Log 8+ total hours — full day of work',xp:250,check:(s,t)=>{const h=(s.hoursLog&&s.hoursLog[t])||{};return Object.values(h).reduce((a,b)=>a+b,0)>=8;}},
+  {id:'dc_close_and_3cats',icon:'👑',title:'Legend Day',desc:'Close a sale AND log 3+ categories',xp:200,check:(s,t)=>s.appointments.some(a=>a.sale&&a.date===t)&&getDayCats(s,t)>=3},
 ];
 
 // ============ STATE ============
 function getState(){
-  try{const s=localStorage.getItem('caio_rpg_v4');if(s)return JSON.parse(s);}catch(e){}
-  return{
+  var defaults={
     totalXP:0,log:[],
     streaks:{store:0,knowledge:0,gym:0,recovery:0,build:0,relationship:0},
     bestStreak:0,lastPunch:{},todaySessions:{},lastPunchDate:'',
     skills:{sales:40,ecom:20,social:30,email:10,brand:20,strategy:30,build:15,fitness:5,mental:35},
-    achievements:[],
-    appointments:[],
-    closeSaleStreak:0,lastSaleDate:'',
+    achievements:[],appointments:[],closeSaleStreak:0,lastSaleDate:'',
     trackers:{savings:0,apple:3217.62,amex:1980.48,loans:0,revenue:0,emails:60,debtSet:false,appleOrig:3217.62,amexOrig:1980.48,loansOrig:0},
-    quotes:[],ideas:[],
+    quotes:[],ideas:[],debts:[],
     dailyChallengeDate:'',dailyChallenges:[],completedChallenges:[],
-    selectedScore:3
+    selectedScore:3,hoursLog:{}
   };
+  try{
+    var s=localStorage.getItem('caio_rpg_v4');
+    if(s){
+      var parsed=JSON.parse(s);
+      // Merge: ensure every required field exists
+      var state=Object.assign({},defaults,parsed);
+      if(!state.trackers)state.trackers=defaults.trackers;
+      if(!state.trackers.savings&&state.trackers.savings!==0)state.trackers.savings=0;
+      if(!state.trackers.revenue&&state.trackers.revenue!==0)state.trackers.revenue=0;
+      if(!state.trackers.emails)state.trackers.emails=60;
+      if(!state.log)state.log=[];
+      if(!state.appointments)state.appointments=[];
+      if(!state.achievements)state.achievements=[];
+      if(!state.quotes)state.quotes=[];
+      if(!state.ideas)state.ideas=[];
+      if(!state.debts)state.debts=[];
+      if(!state.hoursLog)state.hoursLog={};
+      if(!state.streaks)state.streaks=defaults.streaks;
+      if(!state.skills)state.skills=defaults.skills;
+      if(!state.dailyChallenges)state.dailyChallenges=[];
+      if(!state.completedChallenges)state.completedChallenges=[];
+      if(!state.todaySessions)state.todaySessions={};
+      if(!state.lastPunch)state.lastPunch={};
+      return state;
+    }
+  }catch(e){console.error('getState error:',e);}
+  return defaults;
 }
 function saveState(s){try{localStorage.setItem('caio_rpg_v4',JSON.stringify(s));}catch(e){}}
 function getToday(){return new Date().toISOString().slice(0,10);}
 function getMonth(){return new Date().toISOString().slice(0,7);}
 function getLevel(xp){for(let i=LEVELS.length-1;i>=0;i--)if(xp>=LEVELS[i])return i+1;return 1;}
-function getDayCats(state,today){const t=today||getToday();return new Set(state.log.filter(l=>l.date===t).map(l=>l.type)).size;}
+function getDayCats(state,today){const t=today||getToday();const fromLog=new Set(state.log.filter(l=>l.date===t).map(l=>l.type));const hl=(state.hoursLog&&state.hoursLog[t])||{};const fromHours=new Set(Object.keys(hl).filter(k=>(hl[k]||0)>0));return new Set([...fromLog,...fromHours]).size;}
 
 function getCommissionRate(monthlySold){
   if(monthlySold>=60000)return 0.27;
@@ -948,11 +1058,21 @@ function getCommissionRate(monthlySold){
 // ============ DAILY CHALLENGES ============
 function generateChallenges(state){
   const today=getToday();
-  if(state.dailyChallengeDate===today)return state.dailyChallenges;
-  const shuffled=[...DAILY_CHALLENGES].sort(()=>Math.random()-0.5);
-  state.dailyChallenges=shuffled.slice(0,3).map(c=>c.id);
-  state.dailyChallengeDate=today;
-  state.completedChallenges=[];
+  // Always reset on a new day
+  if(state.dailyChallengeDate!==today){
+    // Use date as seed for consistent daily challenges within same day
+    const seed=parseInt(today.replace(/-/g,''));
+    const seededRandom=(n)=>{let x=Math.sin(seed+n)*10000;return x-Math.floor(x);};
+    const pool=[...DAILY_CHALLENGES];
+    // Fisher-Yates with seeded random
+    for(let i=pool.length-1;i>0;i--){
+      const j=Math.floor(seededRandom(i)*(i+1));
+      [pool[i],pool[j]]=[pool[j],pool[i]];
+    }
+    state.dailyChallenges=pool.slice(0,3).map(c=>c.id);
+    state.dailyChallengeDate=today;
+    state.completedChallenges=[];
+  }
   return state.dailyChallenges;
 }
 
@@ -999,37 +1119,65 @@ function logAppt(isSale){
   const newLevel=getLevel(state.totalXP);
   if(newLevel>prevLevel){setTimeout(()=>showLevelUp(newLevel),500);spawnConfetti();}
   showToast(xpGain,isSale?'💰 SALE CLOSED! +'+xpGain+' XP':'APPOINTMENT LOGGED');
-  haptic();
+  
   renderAll();
 }
 
 // ============ PUNCH IN ============
-function punchIn(type){
+function quickLog(type, hours){
+  try {
+    const input = document.getElementById('hi-'+type);
+    if(input) input.value = hours;
+    logHours(type);
+    
+  } catch(e) { console.error('quickLog error:', e); }
+}
+
+function logHours(type){
   const state=getState();
   const today=getToday();
   const s=SESSIONS[type];
-  if(state.lastPunchDate!==today){state.todaySessions={};state.lastPunchDate=today;}
-  const cnt=state.todaySessions[type]||0;
-  if(cnt>=3)return;
+  const input=document.getElementById('hi-'+type);
+  const hours=parseFloat(input?input.value:0)||0;
+  if(hours<=0||hours>16){
+    showToast(0,'ENTER VALID HOURS (0.5 - 16)');
+    
+    return;
+  }
+  const xpEarned=Math.round(s.xpPerHour*hours);
   const note=(document.getElementById('n-'+type)||{}).value||'';
   const prevLevel=getLevel(state.totalXP);
-  state.totalXP+=s.xp;
-  state.todaySessions[type]=cnt+1;
-  if(state.skills[s.skill]!==undefined)state.skills[s.skill]=Math.min(100,state.skills[s.skill]+2);
+  state.totalXP+=xpEarned;
+  // Track hours per type per day
+  if(!state.hoursLog)state.hoursLog={};
+  if(!state.hoursLog[today])state.hoursLog[today]={};
+  state.hoursLog[today][type]=(state.hoursLog[today][type]||0)+hours;
+  // Skill grows proportional to hours
+  if(state.skills[s.skill]!==undefined)
+    state.skills[s.skill]=Math.min(100,state.skills[s.skill]+Math.round(hours*2));
+  // Streak
   const last=state.lastPunch[type];
   const yd=new Date();yd.setDate(yd.getDate()-1);
   const ydStr=yd.toISOString().slice(0,10);
   if(last===ydStr)state.streaks[type]=(state.streaks[type]||0)+1;
   else if(last!==today)state.streaks[type]=1;
   state.lastPunch[type]=today;
-  state.bestStreak=Math.max(state.bestStreak,...Object.values(state.streaks));
-  state.log.unshift({type,name:s.name,icon:s.icon,xp:s.xp,timestamp:new Date().toISOString(),date:today,note});
+  state.bestStreak=Math.max(state.bestStreak,streakMax(state.streaks));
+  // Log entry
+  const label=hours===Math.floor(hours)?hours+'h':hours+'h';
+  state.log.unshift({
+    type,name:s.name,icon:s.icon,xp:xpEarned,
+    hours,timestamp:new Date().toISOString(),date:today,note,
+    display:s.name+' · '+label
+  });
   if(state.log.length>500)state.log=state.log.slice(0,500);
+  // Clear inputs
+  if(input)input.value='';
   const noteEl=document.getElementById('n-'+type);if(noteEl)noteEl.value='';
   // Combo
   const cats=getDayCats(state,today);
   let bonusXP=0;
-  if(cats===3){bonusXP=50;showCombo('COMBO x3! 🎯','3 CATEGORIES · +50 BONUS XP');}
+  if(cats===3){bonusXP=50;showCombo('COMBO x3! 🎯','3 CATEGORIES TODAY · +50 BONUS XP');}
   if(cats===5){bonusXP=150;showCombo('FULL SEND! 🚀','5 CATEGORIES · +150 BONUS XP');}
   state.totalXP+=bonusXP;
   // Challenges
@@ -1039,15 +1187,15 @@ function punchIn(type){
     if(ch&&!state.completedChallenges.includes(cid)&&ch.check(state,today)){
       state.completedChallenges.push(cid);
       state.totalXP+=ch.xp;
-      setTimeout(()=>showToast(ch.xp,ch.title.toUpperCase()+' CHALLENGE!'),800);
+      setTimeout(()=>showToast(ch.xp,ch.title.toUpperCase()+' CHALLENGE!'),900);
     }
   });
   saveState(state);
   checkAchievements(state);
   const newLevel=getLevel(state.totalXP);
   if(newLevel>prevLevel){setTimeout(()=>showLevelUp(newLevel),500);spawnConfetti();}
-  showToast(s.xp+bonusXP,s.name.toUpperCase()+' LOGGED');
-  haptic();
+  showToast(xpEarned+bonusXP,'+'+label+' '+s.name.toUpperCase());
+  
   renderAll();
 }
 
@@ -1063,61 +1211,65 @@ function addDebt(){
   state.debts.push({id:Date.now(),name,amount,original:amount,icon});
   document.getElementById('new-debt-name').value='';
   document.getElementById('new-debt-amount').value='';
-  saveState(state);renderAll();haptic();showToast(0,'DEBT ADDED');
+  saveState(state);renderAll();showToast(0,'DEBT ADDED');
 }
 
+function sdBtn(el){try{saveDebt(parseInt(el.getAttribute('data-id')));}catch(e){console.error(e);}}
+function ddBtn(el){try{deleteDebt(parseInt(el.getAttribute('data-id')));}catch(e){console.error(e);}}
 function saveDebt(id){
+  try{
   const state=getState();
   if(!state.debts)state.debts=[];
-  const debt=state.debts.find(d=>d.id===id);
+  const debt=state.debts.find(function(d){return d.id===id;});
   if(!debt)return;
   const input=document.getElementById('debt-edit-'+id);
   if(!input)return;
   const newVal=parseFloat(input.value);
   if(isNaN(newVal)||newVal<0)return;
   debt.amount=newVal;
-  if(newVal===0)setTimeout(()=>showToast(0,'💪 DEBT CLEARED!'),100);
-  saveState(state);renderAll();haptic();
+  if(newVal===0)showToast(0,'DEBT CLEARED!');
+  saveState(state);renderAll();
+  }catch(e){console.error('saveDebt:',e);}
 }
 
 function deleteDebt(id){
   if(!confirm('Remove this debt?'))return;
   const state=getState();
   state.debts=(state.debts||[]).filter(d=>d.id!==id);
-  saveState(state);renderAll();haptic();
+  saveState(state);renderAll();
 }
 
 function renderDebtList(){
   const state=getState();
-  if(!state.debts)state.debts=[
+  if(!state.debts||!state.debts.length)state.debts=[
     {id:1,name:'Apple Card',amount:3217.62,original:3217.62,icon:'💳'},
     {id:2,name:'Amex',amount:1980.48,original:1980.48,icon:'💳'},
-    {id:3,name:'Student Loans',amount:0,original:0,icon:'🎓'},
+    {id:3,name:'Student Loans',amount:0,original:1,icon:'🎓'},
   ];
   const el=document.getElementById('debt-list');
   if(!el)return;
-  const total=state.debts.reduce((s,d)=>s+d.amount,0);
-  const totalOrig=state.debts.reduce((s,d)=>s+d.original,0);
+  const total=state.debts.reduce((s,d)=>s+(parseFloat(d.amount)||0),0);
+  const totalOrig=state.debts.reduce((s,d)=>s+(parseFloat(d.original)||0),0);
   const paidOff=Math.max(0,totalOrig-total);
-  setEl('total-debt','$'+total.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g,','));
+  setEl('total-debt','$'+(isNaN(total)?0:total).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g,','));
   setEl('debt-paid-label','$'+paidOff.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g,',')+' paid off');
   const totalBar=document.getElementById('total-debt-bar');
   if(totalBar)totalBar.style.width=totalOrig>0?Math.min(100,(total/totalOrig)*100)+'%':'0%';
   el.innerHTML=state.debts.map(d=>{
     const pct=d.original>0?Math.min(100,(d.amount/d.original)*100):0;
-    return`<div class="debt-card">
-      <div class="debt-card-icon">${d.icon}</div>
-      <div class="debt-card-body">
-        <div class="debt-card-name">${d.name}</div>
-        <div class="debt-card-amount">$${d.amount.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g,',')}</div>
-        <div class="debt-card-bar-bg"><div class="debt-card-bar-fill" style="width:${pct}%"></div></div>
-      </div>
-      <div class="debt-card-actions">
-        <input class="debt-edit-input" id="debt-edit-${d.id}" type="number" value="${d.amount}" placeholder="New balance">
-        <button class="debt-save-btn" onclick="saveDebt(${d.id})">UPDATE</button>
-        <button class="debt-del-btn" onclick="deleteDebt(${d.id})">REMOVE</button>
-      </div>
-    </div>`;
+    const amt='$'+(parseFloat(d.amount)||0).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g,',');
+    return '<div class="debt-card">'
+      +'<div class="debt-card-icon">'+d.icon+'</div>'
+      +'<div class="debt-card-body">'
+      +'<div class="debt-card-name">'+d.name+'</div>'
+      +'<div class="debt-card-amount">'+amt+'</div>'
+      +'<div class="debt-card-bar-bg"><div class="debt-card-bar-fill" style="width:'+pct+'%"></div></div>'
+      +'</div>'
+      +'<div class="debt-card-actions">'
+      +'<input class="debt-edit-input" id="debt-edit-'+d.id+'" type="number" value="'+d.amount+'" placeholder="New balance">'
+      +'<button class="debt-save-btn" onclick="saveDebt('+d.id+')">UPDATE</button>'
+      +'<button class="debt-del-btn" onclick="deleteDebt('+d.id+')">REMOVE</button>'
+      +'</div></div>';
   }).join('');
 }
 
@@ -1126,7 +1278,7 @@ function updateSavings(){
   const val=parseFloat(document.getElementById('savings-input').value)||0;
   state.trackers.savings=val;
   document.getElementById('savings-input').value='';
-  saveState(state);checkAchievements(state);renderAll();haptic();showToast(0,'SAVINGS UPDATED');
+  saveState(state);checkAchievements(state);renderAll();showToast(0,'SAVINGS UPDATED');
 }
 
 function updateRevenue(){
@@ -1134,14 +1286,14 @@ function updateRevenue(){
   const val=parseFloat(document.getElementById('rev-input').value)||0;
   state.trackers.revenue=val;
   document.getElementById('rev-input').value='';
-  saveState(state);renderAll();haptic();showToast(0,'REVENUE UPDATED');
+  saveState(state);renderAll();showToast(0,'REVENUE UPDATED');
 }
 function updateEmails(){
   const state=getState();
   const val=parseFloat(document.getElementById('email-input').value)||60;
   state.trackers.emails=val;
   document.getElementById('email-input').value='';
-  saveState(state);renderAll();haptic();showToast(0,'SUBSCRIBERS UPDATED');
+  saveState(state);renderAll();showToast(0,'SUBSCRIBERS UPDATED');
 }
 
 // ============ NOTEBOOK ============
@@ -1159,7 +1311,7 @@ function addQuote(){
   const state=getState();
   state.quotes.unshift({text,date:new Date().toISOString()});
   input.value='';
-  saveState(state);checkAchievements(state);renderAll();haptic();showToast(0,'QUOTE SAVED');
+  saveState(state);checkAchievements(state);renderAll();showToast(0,'QUOTE SAVED');
 }
 function addIdea(){
   const title=document.getElementById('idea-title-input').value.trim();
@@ -1171,7 +1323,7 @@ function addIdea(){
   document.getElementById('idea-desc-input').value='';
   selectedScore=3;
   document.querySelectorAll('.score-btn').forEach(b=>b.classList.remove('selected'));
-  saveState(state);checkAchievements(state);renderAll();haptic();showToast(0,'IDEA SAVED 💡');
+  saveState(state);checkAchievements(state);renderAll();showToast(0,'IDEA SAVED 💡');
 }
 function deleteQuote(i){const state=getState();state.quotes.splice(i,1);saveState(state);renderAll();}
 function deleteIdea(i){const state=getState();state.ideas.splice(i,1);saveState(state);renderAll();}
@@ -1201,14 +1353,14 @@ function addTodo(){
   state.todos=state.todos.filter(t=>!t.done||t.date===today);
   state.todos.push({id:Date.now(),text,done:false,date:today});
   input.value='';
-  saveState(state);renderTodos();haptic();
+  saveState(state);renderTodos();
 }
 
 function toggleTodo(id){
   const state=getState();
   const todo=state.todos.find(t=>t.id===id);
   if(todo){todo.done=!todo.done;if(todo.done){state.totalXP+=10;showToast(10,'TASK COMPLETE +10 XP');}}
-  saveState(state);renderTodos();haptic();
+  saveState(state);renderTodos();
 }
 
 function deleteTodo(id){
@@ -1220,7 +1372,7 @@ function deleteTodo(id){
 function clearCompletedTodos(){
   const state=getState();
   state.todos=(state.todos||[]).filter(t=>!t.done);
-  saveState(state);renderTodos();haptic();
+  saveState(state);renderTodos();
 }
 
 function renderTodos(){
@@ -1248,12 +1400,13 @@ function renderTodos(){
     return;
   }
   if(emptyEl)emptyEl.style.display='none';
-  listEl.innerHTML=todos.map(t=>`
-    <div class="todo-item">
-      <button class="todo-check ${t.done?'checked':''}" onclick="toggleTodo(${t.id})"></button>
-      <span class="todo-text ${t.done?'done':''}">${t.text}</span>
-      <button class="todo-del" onclick="deleteTodo(${t.id})">×</button>
-    </div>`).join('');
+  listEl.innerHTML=todos.map(function(t){
+    return '<div class="todo-item">'
+      +'<button class="todo-check '+(t.done?'checked':'')+'" data-id="'+t.id+'" onclick="togTodo(this)"></button>'
+      +'<span class="todo-text '+(t.done?'done':'')+'">'+t.text+'</span>'
+      +'<button class="todo-del" data-id="'+t.id+'" onclick="delTodo(this)">×</button>'
+      +'</div>';
+  }).join('');
 }
 
 // ============ SESSION EDITING ============
@@ -1267,6 +1420,27 @@ function toggleEditSession(i){
   }
 }
 
+function togTodo(btn){toggleTodo(parseInt(btn.getAttribute('data-id')));}
+function delTodo(btn){deleteTodo(parseInt(btn.getAttribute('data-id')));}
+function delQuote(btn){deleteQuote(parseInt(btn.getAttribute('data-idx')));}
+function delIdea(btn){deleteIdea(parseInt(btn.getAttribute('data-idx')));}
+function delSession(btn){
+  var ts=btn.getAttribute('data-ts');
+  var isAppt=btn.getAttribute('data-appt')==='true';
+  deleteSession(ts,isAppt);
+}
+function togEdit(btn){
+  var idx=btn.getAttribute('data-idx');
+  toggleEditSession(parseInt(idx));
+}
+function saveNote(btn){
+  var ts=btn.getAttribute('data-ts');
+  var ta=btn.parentElement.querySelector('textarea');
+  if(!ts||!ta)return;
+  var state=getState();
+  var logEntry=state.log.find(function(l){return l.timestamp===ts;});
+  if(logEntry){logEntry.note=ta.value.trim();saveState(state);showToast(0,'NOTE SAVED');renderAll();}
+}
 function saveSessionNote(ts){
   const state=getState();
   const logEntry=state.log.find(l=>l.timestamp===ts);
@@ -1278,7 +1452,7 @@ function saveSessionNote(ts){
   logEntry.note=note;
   saveState(state);
   showToast(0,'NOTE SAVED');
-  haptic();
+  
   renderAll();
 }
 
@@ -1316,12 +1490,12 @@ function deleteSession(ts, isAppt){
     }
     // Recalculate streaks for this type
     state.streaks[logEntry.type]=calcStreak(state,logEntry.type);
-    state.bestStreak=Math.max(0,...Object.values(state.streaks));
+    state.bestStreak=streakMax(state.streaks);
   }
 
   saveState(state);
   showToast(0,'SESSION REMOVED');
-  haptic();
+  
   renderAll();
 }
 
@@ -1382,7 +1556,7 @@ function renderAll(){
   const todayXP=todayLog.reduce((s,l)=>s+l.xp,0)+state.appointments.filter(a=>a.date===today).length*15;
   const todayCloses=state.appointments.filter(a=>a.sale&&a.date===today).length;
   setEl('today-xp',todayXP);
-  setEl('cur-streak',Math.max(0,...Object.values(state.streaks)));
+  setEl('cur-streak',Object.values(state.streaks).length?streakMax(state.streaks):0);
   setEl('today-closes',todayCloses);
 
   // Termite page
@@ -1442,25 +1616,30 @@ function renderAll(){
   // Appointment dots
   const dotsEl=document.getElementById('appt-dots');
   if(dotsEl){
-    dotsEl.innerHTML=todayAppts.map((a,i)=>`<div class="appt-dot ${a.sale?'sale':'no-sale'}" title="${a.sale?'Sale: $'+a.value:'No sale'}">${a.sale?'✅':'❌'}</div>`).join('');
+    dotsEl.innerHTML=todayAppts.map(function(a){
+      return '<div class="appt-dot '+(a.sale?'sale':'no-sale')+'" title="'+(a.sale?'Sale: $'+a.value:'No sale')+'">'+(a.sale?'✅':'❌')+'</div>';
+    }).join('');
     // Add empty slots up to 10
     const remaining=Math.max(0,10-todayAppts.length);
-    for(let i=0;i<remaining;i++)dotsEl.innerHTML+=`<div class="appt-dot" style="opacity:0.3">○</div>`;
+    for(let i=0;i<remaining;i++)dotsEl.innerHTML+='<div class="appt-dot" style="opacity:0.3">○</div>';
   }
 
-  // Punch in cards
+  // Hour log cards
+  if(!state.hoursLog)state.hoursLog={};
+  const todayHours=state.hoursLog[today]||{};
+  let totalHoursToday=0;
+  let totalXPFromHours=0;
   Object.keys(SESSIONS).forEach(type=>{
-    const cnt=state.todaySessions[type]||0;
     const s=SESSIONS[type];
+    const hrs=todayHours[type]||0;
+    totalHoursToday+=hrs;
+    totalXPFromHours+=Math.round(s.xpPerHour*hrs);
     const streak=document.getElementById('s-'+type);if(streak)streak.textContent=state.streaks[type]||0;
-    const btn=document.getElementById('b-'+type);
-    if(btn){
-      if(cnt>=3){btn.textContent='✓ MAX TODAY';btn.className='pi-btn done';btn.disabled=true;}
-      else{btn.textContent=cnt>0?'+ AGAIN ('+cnt+'/3)':'PUNCH IN';btn.className='pi-btn btn-'+s.color;btn.disabled=false;}
-    }
-    const dots=document.getElementById('d-'+type);
-    if(dots){dots.innerHTML='';for(let i=0;i<3;i++){const dot=document.createElement('div');dot.className='dot'+(i<cnt?' dot-'+s.color:'');dots.appendChild(dot);}}
+    const hEl=document.getElementById('h-'+type);
+    if(hEl)hEl.textContent=hrs>0?(hrs===Math.floor(hrs)?hrs+'h':hrs+'h'):'0h';
   });
+  setEl('today-hours-total',totalHoursToday>0?(totalHoursToday===Math.floor(totalHoursToday)?totalHoursToday+'h':totalHoursToday.toFixed(1)+'h'):'0h');
+  setEl('today-xp-from-hours','+'+totalXPFromHours+' XP earned today');
 
   // Challenges
   const challenges=generateChallenges(state);saveState(state);
@@ -1468,14 +1647,14 @@ function renderAll(){
   if(cl){cl.innerHTML=challenges.map(cid=>{
     const ch=DAILY_CHALLENGES.find(c=>c.id===cid);if(!ch)return'';
     const done=state.completedChallenges.includes(cid);
-    return`<div class="challenge-item ${done?'done':''}"><div class="ch-icon">${ch.icon}</div><div class="ch-text"><strong>${ch.title}</strong>${ch.desc}</div><div class="ch-xp">+${ch.xp}</div><span>${done?'✅':'⬜'}</span></div>`;
+    return'<div class="challenge-item '+(done?'done':'')+'"><div class="ch-icon">'+ch.icon+'</div><div class="ch-text"><strong>'+ch.title+'</strong>'+ch.desc+'</div><div class="ch-xp">+'+ch.xp+'</div><span>'+(done?'✅':'⬜')+'</span></div>';
   }).join('');}
 
   // $100K goal
   const savings=state.trackers.savings||0;
   const savingsPct=Math.min(100,(savings/100000)*100);
   const savingsRemaining=Math.max(0,100000-savings);
-  const savingsStr='$'+savings.toLocaleString();
+  const savingsStr='$'+(isNaN(savings)?0:savings).toLocaleString();
   const savingsPctStr=savingsPct.toFixed(1)+'% there · $'+savingsRemaining.toLocaleString()+' to go';
   setEl('savings-display',savingsStr);setEl('savings-display2',savingsStr);
   setEl('savings-pct',savingsPctStr);setEl('savings-pct2',savingsPctStr);
@@ -1522,7 +1701,7 @@ function renderAll(){
     const locked=ACHIEVEMENTS.filter(a=>!state.achievements.includes(a.id)).slice(0,count-recent.length);
     el.innerHTML=[...recent,...locked].map(a=>{
       const u=state.achievements.includes(a.id);
-      return`<div class="ach-card ${u?'unlocked':'locked'}"><span class="ach-icon-el">${a.icon}</span><div class="ach-name-el">${a.name}</div></div>`;
+      return '<div class="ach-card '+(u?'unlocked':'locked')+'"><span class="ach-icon-el">'+a.icon+'</span><div class="ach-name-el">'+a.name+'</div></div>';
     }).join('');
   };
   renderAch('ach-preview',6);renderAch('ach-full',ACHIEVEMENTS.length);
@@ -1534,25 +1713,29 @@ function renderAll(){
 
   // Quotes
   const ql=document.getElementById('quotes-list');
-  if(ql){ql.innerHTML=state.quotes.length?state.quotes.map((q,i)=>`
-    <div class="quote-item">
-      <button class="delete-btn" onclick="deleteQuote(${i})">×</button>
-      <div class="quote-text">"${q.text}"</div>
-      <div class="quote-meta">${new Date(q.date).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'})}</div>
-    </div>`).join(''):'<div class="empty-state" style="padding:20px;">// NO QUOTES YET<br>Save something that moves you</div>';}
+  if(ql){ql.innerHTML=state.quotes.length?state.quotes.map(function(q,i){
+    var dt=new Date(q.date).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});
+    return '<div class="quote-item">'
+      +'<button class="delete-btn" data-idx="'+i+'" onclick="delQuote(this)">×</button>'
+      +'<div class="quote-text">&ldquo;'+q.text+'&rdquo;</div>'
+      +'<div class="quote-meta">'+dt+'</div>'
+      +'</div>';
+  }).join(''):'<div class="empty-state" style="padding:20px;">// NO QUOTES YET<br>Save something that moves you</div>';}
 
   // Ideas
   const il=document.getElementById('ideas-list');
-  if(il){il.innerHTML=state.ideas.length?state.ideas.map((idea,i)=>`
-    <div class="idea-item">
-      <button class="delete-btn" onclick="deleteIdea(${i})">×</button>
-      <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;">
-        <div class="idea-title">${idea.title}</div>
-        <span class="idea-score">🔥 ${idea.score}/5</span>
-      </div>
-      ${idea.desc?`<div class="idea-desc">${idea.desc}</div>`:''}
-      <div class="idea-meta">${new Date(idea.date).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'})}</div>
-    </div>`).join(''):'<div class="empty-state" style="padding:20px;">// NO IDEAS YET<br>Every big business started as a note</div>';}
+  if(il){il.innerHTML=state.ideas.length?state.ideas.map(function(idea,i){
+    var dt=new Date(idea.date).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});
+    return '<div class="idea-item">'
+      +'<button class="delete-btn" data-idx="'+i+'" onclick="delIdea(this)">×</button>'
+      +'<div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;">'
+      +'<div class="idea-title">'+idea.title+'</div>'
+      +'<span class="idea-score">🔥 '+idea.score+'/5</span>'
+      +'</div>'
+      +(idea.desc?'<div class="idea-desc">'+idea.desc+'</div>':'')
+      +'<div class="idea-meta">'+dt+'</div>'
+      +'</div>';
+  }).join(''):'<div class="empty-state" style="padding:20px;">// NO IDEAS YET<br>Every big business started as a note</div>';}
 
   // Log
   setEl('log-count',state.log.length+' SESSIONS');
@@ -1572,27 +1755,23 @@ function renderAll(){
       const isAppt=e.isAppt;
       const safeTs=e.timestamp.replace(/[^0-9T:.Z-]/g,'');
       const editId='edit-'+i;
-      return`<div class="log-item" id="logitem-${i}">
-        <div class="log-icon-el">${e.icon}</div>
-        <div class="log-body" style="width:100%;">
-          <div style="display:flex;align-items:flex-start;justify-content:space-between;">
-            <div>
-              <div class="log-name-el">${e.name}</div>
-              ${e.note?`<div class="log-note-el">"${e.note}"</div>`:''}
-              <div class="log-time-el">${time}</div>
-            </div>
-            <div class="log-xp-el">+${e.xp}</div>
-          </div>
-          <div class="log-item-actions">
-            ${!e.isAppt?`<button class="log-action-btn" onclick="toggleEditSession(${i})">✏️ NOTE</button>`:''}
-            <button class="log-action-btn danger" onclick="deleteSession('${safeTs}',${e.isAppt})">🗑 REMOVE</button>
-          </div>
-          ${!e.isAppt?`<div class="log-edit-area" id="${editId}">
-            <textarea class="log-edit-input" id="note-${i}" placeholder="Add or edit note...">${e.note||''}</textarea>
-            <button class="log-edit-save" onclick="saveSessionNote('${safeTs}')">SAVE NOTE</button>
-          </div>`:''}
-        </div>
-      </div>`;
+      const hoursLabel=e.hours?e.hours+'h':'';
+      const noteHtml=e.note?'<div class="log-note-el">"'+e.note+'"</div>':'';
+      const editBtn=!e.isAppt?'<button class="log-action-btn" onclick="toggleEditSession('+i+')">✏️ NOTE</button>':'';
+      const editArea=!e.isAppt?('<div class="log-edit-area" id="edit-'+i+'"><textarea class="log-edit-input" id="note-'+i+'" placeholder="Add or edit note...">'+(e.note||'')+'</textarea><button class="log-edit-save" data-ts="'+safeTs+'" onclick="saveNote(this)">SAVE NOTE</button></div>'):'';
+      return '<div class="log-item" id="logitem-'+i+'">'
+        +'<div class="log-icon-el">'+e.icon+'</div>'
+        +'<div class="log-body" style="width:100%;">'
+        +'<div style="display:flex;align-items:flex-start;justify-content:space-between;">'
+        +'<div><div class="log-name-el">'+e.name+(hoursLabel?' · '+hoursLabel:'')+'</div>'
+        +noteHtml
+        +'<div class="log-time-el">'+time+'</div></div>'
+        +'<div class="log-xp-el">+'+e.xp+'</div>'
+        +'</div>'
+        +'<div class="log-item-actions">'+editBtn
+        +'<button class="log-action-btn danger" data-ts="'+safeTs+'" data-appt="'+e.isAppt+'" onclick="delSession(this)">🗑 REMOVE</button>'
+        +'</div>'+editArea
+        +'</div></div>';
     }).join('');}
   }
 }
@@ -1627,17 +1806,37 @@ function showLevelUp(level){
   document.getElementById('lu-title-el').textContent=TITLES[Math.min(level-1,TITLES.length-1)];
   document.getElementById('lu-screen').classList.add('show');
 }
-function closeLevelUp(){document.getElementById('lu-screen').classList.remove('show');haptic();}
+function closeLevelUp(){document.getElementById('lu-screen').classList.remove('show');}
 function showCombo(title,sub){setEl('combo-title',title);setEl('combo-sub',sub);const b=document.getElementById('combo-banner');if(b)b.classList.add('show');}
-function haptic(){if(navigator.vibrate)navigator.vibrate(30);}
+function safeMax(...vals){
+  const filtered=vals.filter(v=>typeof v==='number'&&isFinite(v));
+  return filtered.length?Math.max(...filtered):0;
+}
+function streakMax(streaks){
+  const vals=Object.values(streaks||{});
+  return vals.length?Math.max(0,...vals):0;
+}
 function spawnConfetti(){
   const colors=['#00ff88','#ff6b35','#7c3aff','#00d4ff','#ffd700','#ff6eb4'];
   for(let i=0;i<50;i++){const c=document.createElement('div');c.className='confetti-piece';c.style.cssText=`left:${Math.random()*100}%;background:${colors[Math.floor(Math.random()*colors.length)]};animation-delay:${Math.random()*0.5}s;animation-duration:${1.5+Math.random()}s;`;document.body.appendChild(c);setTimeout(()=>c.remove(),2500);}
 }
 function clearData(){if(confirm('Reset ALL data?')){localStorage.removeItem('caio_rpg_v4');renderAll();}}
 
-renderAll();
-renderTodos();
+window.onerror=function(msg,src,line,col,err){
+  var el=document.getElementById('toast');
+  if(el){
+    var txp=document.getElementById('t-xp');
+    var tmsg=document.getElementById('t-msg');
+    if(txp)txp.textContent='ERR:';
+    if(tmsg)tmsg.textContent=(err&&err.message?err.message:msg)+'@L'+line+':'+col;
+    el.classList.add('show');
+    setTimeout(function(){el.classList.remove('show');},8000);
+  }
+  console.error('APP ERROR:',msg,'line:',line,'col:',col,'err:',err);
+  return false;
+};
+try{renderAll();}catch(e){console.error('renderAll failed:',e);alert('renderAll error: '+e.message);}
+try{renderTodos();}catch(e){console.error('renderTodos failed:',e);}
 </script>
 </body>
 </html>
