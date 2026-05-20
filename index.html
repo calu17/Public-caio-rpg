@@ -306,9 +306,10 @@ body::before{content:'';position:fixed;inset:0;background:repeating-linear-gradi
 
 /* HOUR LOGGING */
 .hour-input-row{display:flex;gap:4px;margin-bottom:6px;}
-.hour-quick-btn{flex:1;padding:7px 2px;border-radius:8px;border:1px solid var(--border);background:var(--bg3);color:var(--text-mid);font-family:'Space Mono',monospace;font-size:9px;cursor:pointer;transition:all 0.15s;letter-spacing:0;}
-.hour-quick-btn:active{transform:scale(0.93);background:var(--bg2);}
-.hour-quick-btn:hover{border-color:var(--text-mid);color:var(--text);}
+.hour-quick-btn{flex:1;padding:7px 2px;border-radius:8px;border:1px solid var(--border);background:var(--bg3);color:var(--text-mid);font-family:'Space Mono',monospace;font-size:9px;cursor:pointer;transition:border 0.15s,color 0.15s;letter-spacing:0;font-weight:400;}
+.hour-quick-btn:active{transform:scale(0.93);}
+
+.hour-sel-display{font-family:'Space Mono',monospace;font-size:10px;color:var(--green);min-height:14px;margin-bottom:6px;letter-spacing:1px;}
 .hour-custom-row{display:flex;gap:6px;margin-bottom:6px;}
 .hour-input{flex:1;background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:8px 10px;font-family:'Space Mono',monospace;font-size:11px;color:var(--text);}
 .hour-input:focus{outline:none;border-color:var(--purple);}
@@ -553,26 +554,58 @@ body::before{content:'';position:fixed;inset:0;background:repeating-linear-gradi
     <div class="header-sub">HOURS IN = XP OUT</div>
   </div>
 
-  <div class="card" style="padding:14px;margin-bottom:16px;text-align:center;">
-    <div style="font-family:'Space Mono',monospace;font-size:9px;color:var(--text-dim);letter-spacing:2px;margin-bottom:4px;">TOTAL HOURS LOGGED TODAY</div>
-    <div style="font-family:'Bebas Neue',cursive;font-size:48px;color:var(--green);line-height:1;" id="today-hours-total">0h</div>
-    <div style="font-family:'Space Mono',monospace;font-size:9px;color:var(--text-dim);margin-top:4px;" id="today-xp-from-hours">+0 XP earned today</div>
+  <div class="card" style="padding:14px;margin-bottom:16px;">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
+      <div style="font-family:'Space Mono',monospace;font-size:9px;color:var(--text-dim);letter-spacing:2px;">TODAY'S HOURS</div>
+      <div style="font-family:'Space Mono',monospace;font-size:9px;color:var(--green);" id="today-xp-from-hours">+0 XP</div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;" id="hours-breakdown">
+      <div style="text-align:center;background:var(--bg3);border-radius:8px;padding:8px 4px;">
+        <div style="font-family:'Bebas Neue',cursive;font-size:22px;color:var(--green);" id="hsum-store">0h</div>
+        <div style="font-family:'Space Mono',monospace;font-size:7px;color:var(--text-dim);">STORE</div>
+      </div>
+      <div style="text-align:center;background:var(--bg3);border-radius:8px;padding:8px 4px;">
+        <div style="font-family:'Bebas Neue',cursive;font-size:22px;color:var(--purple);" id="hsum-knowledge">0h</div>
+        <div style="font-family:'Space Mono',monospace;font-size:7px;color:var(--text-dim);">STUDY</div>
+      </div>
+      <div style="text-align:center;background:var(--bg3);border-radius:8px;padding:8px 4px;">
+        <div style="font-family:'Bebas Neue',cursive;font-size:22px;color:var(--pink);" id="hsum-gym">0h</div>
+        <div style="font-family:'Space Mono',monospace;font-size:7px;color:var(--text-dim);">WORKOUT</div>
+      </div>
+      <div style="text-align:center;background:var(--bg3);border-radius:8px;padding:8px 4px;">
+        <div style="font-family:'Bebas Neue',cursive;font-size:22px;color:var(--blue);" id="hsum-recovery">0h</div>
+        <div style="font-family:'Space Mono',monospace;font-size:7px;color:var(--text-dim);">RECOVERY</div>
+      </div>
+      <div style="text-align:center;background:var(--bg3);border-radius:8px;padding:8px 4px;">
+        <div style="font-family:'Bebas Neue',cursive;font-size:22px;color:var(--gold);" id="hsum-build">0h</div>
+        <div style="font-family:'Space Mono',monospace;font-size:7px;color:var(--text-dim);">BUILD</div>
+      </div>
+      <div style="text-align:center;background:var(--bg3);border-radius:8px;padding:8px 4px;">
+        <div style="font-family:'Bebas Neue',cursive;font-size:22px;color:var(--rose);" id="hsum-relationship">0h</div>
+        <div style="font-family:'Space Mono',monospace;font-size:7px;color:var(--text-dim);">QUALITY</div>
+      </div>
+    </div>
+    <div style="margin-top:10px;padding-top:10px;border-top:1px solid var(--border);display:flex;justify-content:space-between;">
+      <div style="font-family:'Space Mono',monospace;font-size:9px;color:var(--text-dim);">TOTAL TODAY</div>
+      <div style="font-family:'Bebas Neue',cursive;font-size:18px;color:var(--text);" id="today-hours-total">0h</div>
+    </div>
   </div>
 
   <div class="section-title">🏪 Business</div>
   <div class="punchin-grid">
-    <div class="punchin-card border-green">
+    <div class="punchin-card border-green" id="hcard-store">
       <span class="pi-icon">🏪</span>
       <div class="pi-name">Margot Molds</div>
       <div class="pi-desc">Store, social, email, content. Building the asset.</div>
       <div class="pi-xp-badge bg-green c-green">60 XP / HR</div>
       <div class="streak-row"><span class="streak-label">🔥 STREAK</span><span class="streak-val" id="s-store">0</span></div>
+      <div class="hour-sel-display" id="hsel-store"></div>
       <div style="font-family:'Space Mono',monospace;font-size:9px;color:var(--text-dim);margin-bottom:4px;">TODAY: <span class="c-green" id="h-store">0h</span></div>
       <div class="hour-input-row">
-        <button class="hour-quick-btn" onclick="quickLog('store',0.5)">30m</button>
-        <button class="hour-quick-btn" onclick="quickLog('store',1)">1h</button>
-        <button class="hour-quick-btn" onclick="quickLog('store',2)">2h</button>
-        <button class="hour-quick-btn" onclick="quickLog('store',3)">3h</button>
+        <button class="hour-quick-btn hq-store" id="hq-store-0_5" onclick="quickLog('store',0.5)">30m</button>
+        <button class="hour-quick-btn hq-store" id="hq-store-1" onclick="quickLog('store',1)">1h</button>
+        <button class="hour-quick-btn hq-store" id="hq-store-2" onclick="quickLog('store',2)">2h</button>
+        <button class="hour-quick-btn hq-store" id="hq-store-3" onclick="quickLog('store',3)">3h</button>
       </div>
       <div class="hour-custom-row">
         <input class="hour-input" id="hi-store" type="number" step="0.5" min="0.5" max="16" placeholder="Custom hrs">
@@ -580,18 +613,19 @@ body::before{content:'';position:fixed;inset:0;background:repeating-linear-gradi
       </div>
       <textarea class="note-input" id="n-store" placeholder="Add a note..."></textarea>
     </div>
-    <div class="punchin-card border-purple">
+    <div class="punchin-card border-purple" id="hcard-knowledge">
       <span class="pi-icon">📚</span>
       <div class="pi-name">Study Session</div>
       <div class="pi-desc">Book, podcast, notes. Hormozi, business, marketing.</div>
       <div class="pi-xp-badge bg-purple c-purple">50 XP / HR</div>
       <div class="streak-row"><span class="streak-label">🔥 STREAK</span><span class="streak-val" id="s-knowledge">0</span></div>
+      <div class="hour-sel-display" id="hsel-knowledge"></div>
       <div style="font-family:'Space Mono',monospace;font-size:9px;color:var(--text-dim);margin-bottom:4px;">TODAY: <span class="c-purple" id="h-knowledge">0h</span></div>
       <div class="hour-input-row">
-        <button class="hour-quick-btn" onclick="quickLog('knowledge',0.5)">30m</button>
-        <button class="hour-quick-btn" onclick="quickLog('knowledge',1)">1h</button>
-        <button class="hour-quick-btn" onclick="quickLog('knowledge',2)">2h</button>
-        <button class="hour-quick-btn" onclick="quickLog('knowledge',3)">3h</button>
+        <button class="hour-quick-btn hq-knowledge" id="hq-knowledge-0_5" onclick="quickLog('knowledge',0.5)">30m</button>
+        <button class="hour-quick-btn hq-knowledge" id="hq-knowledge-1" onclick="quickLog('knowledge',1)">1h</button>
+        <button class="hour-quick-btn hq-knowledge" id="hq-knowledge-2" onclick="quickLog('knowledge',2)">2h</button>
+        <button class="hour-quick-btn hq-knowledge" id="hq-knowledge-3" onclick="quickLog('knowledge',3)">3h</button>
       </div>
       <div class="hour-custom-row">
         <input class="hour-input" id="hi-knowledge" type="number" step="0.5" min="0.5" max="16" placeholder="Custom hrs">
@@ -603,18 +637,19 @@ body::before{content:'';position:fixed;inset:0;background:repeating-linear-gradi
 
   <div class="section-title">💪 Health</div>
   <div class="punchin-grid">
-    <div class="punchin-card border-pink">
+    <div class="punchin-card border-pink" id="hcard-gym">
       <span class="pi-icon">🏋️</span>
       <div class="pi-name">Workout</div>
       <div class="pi-desc">Gym, run, bodyweight. Strong body = strong mind.</div>
       <div class="pi-xp-badge bg-pink c-pink">40 XP / HR</div>
       <div class="streak-row"><span class="streak-label">🔥 STREAK</span><span class="streak-val" id="s-gym">0</span></div>
+      <div class="hour-sel-display" id="hsel-gym"></div>
       <div style="font-family:'Space Mono',monospace;font-size:9px;color:var(--text-dim);margin-bottom:4px;">TODAY: <span class="c-pink" id="h-gym">0h</span></div>
       <div class="hour-input-row">
-        <button class="hour-quick-btn" onclick="quickLog('gym',0.5)">30m</button>
-        <button class="hour-quick-btn" onclick="quickLog('gym',1)">1h</button>
-        <button class="hour-quick-btn" onclick="quickLog('gym',1.5)">1.5h</button>
-        <button class="hour-quick-btn" onclick="quickLog('gym',2)">2h</button>
+        <button class="hour-quick-btn hq-gym" id="hq-gym-0_5" onclick="quickLog('gym',0.5)">30m</button>
+        <button class="hour-quick-btn hq-gym" id="hq-gym-1" onclick="quickLog('gym',1)">1h</button>
+        <button class="hour-quick-btn hq-gym" id="hq-gym-1_5" onclick="quickLog('gym',1.5)">1.5h</button>
+        <button class="hour-quick-btn hq-gym" id="hq-gym-2" onclick="quickLog('gym',2)">2h</button>
       </div>
       <div class="hour-custom-row">
         <input class="hour-input" id="hi-gym" type="number" step="0.5" min="0.5" max="16" placeholder="Custom hrs">
@@ -622,18 +657,19 @@ body::before{content:'';position:fixed;inset:0;background:repeating-linear-gradi
       </div>
       <textarea class="note-input" id="n-gym" placeholder="What did you train?"></textarea>
     </div>
-    <div class="punchin-card border-blue">
+    <div class="punchin-card border-blue" id="hcard-recovery">
       <span class="pi-icon">🏄</span>
       <div class="pi-name">Active Recovery</div>
       <div class="pi-desc">Surf, walk, stretch, meditate.</div>
       <div class="pi-xp-badge bg-blue c-blue">25 XP / HR</div>
       <div class="streak-row"><span class="streak-label">🔥 STREAK</span><span class="streak-val" id="s-recovery">0</span></div>
+      <div class="hour-sel-display" id="hsel-recovery"></div>
       <div style="font-family:'Space Mono',monospace;font-size:9px;color:var(--text-dim);margin-bottom:4px;">TODAY: <span class="c-blue" id="h-recovery">0h</span></div>
       <div class="hour-input-row">
-        <button class="hour-quick-btn" onclick="quickLog('recovery',0.5)">30m</button>
-        <button class="hour-quick-btn" onclick="quickLog('recovery',1)">1h</button>
-        <button class="hour-quick-btn" onclick="quickLog('recovery',1.5)">1.5h</button>
-        <button class="hour-quick-btn" onclick="quickLog('recovery',2)">2h</button>
+        <button class="hour-quick-btn hq-recovery" id="hq-recovery-0_5" onclick="quickLog('recovery',0.5)">30m</button>
+        <button class="hour-quick-btn hq-recovery" id="hq-recovery-1" onclick="quickLog('recovery',1)">1h</button>
+        <button class="hour-quick-btn hq-recovery" id="hq-recovery-1_5" onclick="quickLog('recovery',1.5)">1.5h</button>
+        <button class="hour-quick-btn hq-recovery" id="hq-recovery-2" onclick="quickLog('recovery',2)">2h</button>
       </div>
       <div class="hour-custom-row">
         <input class="hour-input" id="hi-recovery" type="number" step="0.5" min="0.5" max="16" placeholder="Custom hrs">
@@ -645,18 +681,19 @@ body::before{content:'';position:fixed;inset:0;background:repeating-linear-gradi
 
   <div class="section-title">🔧 Creation & Life</div>
   <div class="punchin-grid">
-    <div class="punchin-card border-gold">
+    <div class="punchin-card border-gold" id="hcard-build">
       <span class="pi-icon">🔧</span>
       <div class="pi-name">Build Something</div>
       <div class="pi-desc">Workshop, prototypes, mold designs, woodwork.</div>
       <div class="pi-xp-badge bg-gold c-gold">70 XP / HR</div>
       <div class="streak-row"><span class="streak-label">🔥 STREAK</span><span class="streak-val" id="s-build">0</span></div>
+      <div class="hour-sel-display" id="hsel-build"></div>
       <div style="font-family:'Space Mono',monospace;font-size:9px;color:var(--text-dim);margin-bottom:4px;">TODAY: <span class="c-gold" id="h-build">0h</span></div>
       <div class="hour-input-row">
-        <button class="hour-quick-btn" onclick="quickLog('build',0.5)">30m</button>
-        <button class="hour-quick-btn" onclick="quickLog('build',1)">1h</button>
-        <button class="hour-quick-btn" onclick="quickLog('build',2)">2h</button>
-        <button class="hour-quick-btn" onclick="quickLog('build',3)">3h</button>
+        <button class="hour-quick-btn hq-build" id="hq-build-0_5" onclick="quickLog('build',0.5)">30m</button>
+        <button class="hour-quick-btn hq-build" id="hq-build-1" onclick="quickLog('build',1)">1h</button>
+        <button class="hour-quick-btn hq-build" id="hq-build-2" onclick="quickLog('build',2)">2h</button>
+        <button class="hour-quick-btn hq-build" id="hq-build-3" onclick="quickLog('build',3)">3h</button>
       </div>
       <div class="hour-custom-row">
         <input class="hour-input" id="hi-build" type="number" step="0.5" min="0.5" max="16" placeholder="Custom hrs">
@@ -664,18 +701,19 @@ body::before{content:'';position:fixed;inset:0;background:repeating-linear-gradi
       </div>
       <textarea class="note-input" id="n-build" placeholder="What did you build?"></textarea>
     </div>
-    <div class="punchin-card border-rose">
+    <div class="punchin-card border-rose" id="hcard-relationship">
       <span class="pi-icon">💕</span>
       <div class="pi-name">Quality Time</div>
       <div class="pi-desc">Called her, planned something. Long distance takes effort.</div>
       <div class="pi-xp-badge bg-rose c-rose">30 XP / HR</div>
       <div class="streak-row"><span class="streak-label">🔥 STREAK</span><span class="streak-val" id="s-relationship">0</span></div>
+      <div class="hour-sel-display" id="hsel-relationship"></div>
       <div style="font-family:'Space Mono',monospace;font-size:9px;color:var(--text-dim);margin-bottom:4px;">TODAY: <span class="c-rose" id="h-relationship">0h</span></div>
       <div class="hour-input-row">
-        <button class="hour-quick-btn" onclick="quickLog('relationship',0.5)">30m</button>
-        <button class="hour-quick-btn" onclick="quickLog('relationship',1)">1h</button>
-        <button class="hour-quick-btn" onclick="quickLog('relationship',2)">2h</button>
-        <button class="hour-quick-btn" onclick="quickLog('relationship',3)">3h</button>
+        <button class="hour-quick-btn hq-relationship" id="hq-relationship-0_5" onclick="quickLog('relationship',0.5)">30m</button>
+        <button class="hour-quick-btn hq-relationship" id="hq-relationship-1" onclick="quickLog('relationship',1)">1h</button>
+        <button class="hour-quick-btn hq-relationship" id="hq-relationship-2" onclick="quickLog('relationship',2)">2h</button>
+        <button class="hour-quick-btn hq-relationship" id="hq-relationship-3" onclick="quickLog('relationship',3)">3h</button>
       </div>
       <div class="hour-custom-row">
         <input class="hour-input" id="hi-relationship" type="number" step="0.5" min="0.5" max="16" placeholder="Custom hrs">
@@ -952,12 +990,12 @@ body::before{content:'';position:fixed;inset:0;background:repeating-linear-gradi
 <script>
 // ============ CONFIG ============
 const SESSIONS={
-  store:{name:'Margot Molds',icon:'🏪',xp:60,color:'green',skill:'ecom'},
-  knowledge:{name:'Study Session',icon:'📚',xp:40,color:'purple',skill:'strategy'},
-  gym:{name:'Workout',icon:'🏋️',xp:50,color:'pink',skill:'fitness'},
-  recovery:{name:'Active Recovery',icon:'🏄',xp:25,color:'blue',skill:'mental'},
-  build:{name:'Build Something',icon:'🔧',xp:55,color:'gold',skill:'build'},
-  relationship:{name:'Quality Time',icon:'💕',xp:30,color:'rose',skill:'mental'}
+  store:{name:'Margot Molds',icon:'🏪',xp:60,xpPerHour:60,color:'green',skill:'ecom'},
+  knowledge:{name:'Study Session',icon:'📚',xp:40,xpPerHour:50,color:'purple',skill:'strategy'},
+  gym:{name:'Workout',icon:'🏋️',xp:50,xpPerHour:40,color:'pink',skill:'fitness'},
+  recovery:{name:'Active Recovery',icon:'🏄',xp:25,xpPerHour:25,color:'blue',skill:'mental'},
+  build:{name:'Build Something',icon:'🔧',xp:55,xpPerHour:70,color:'gold',skill:'build'},
+  relationship:{name:'Quality Time',icon:'💕',xp:30,xpPerHour:30,color:'rose',skill:'mental'}
 };
 const LEVELS=[0,500,1200,2200,3500,5000,7000,9500,12500,16000,20000,25000,31000,38000,46000,55000];
 const TITLES=['THE STARTER','THE GRINDER','THE BUILDER','THE CLOSER','THE HUSTLER','THE OPERATOR','THE STRATEGIST','THE ENTREPRENEUR','THE CREATOR','THE FOUNDER','THE INVESTOR','THE VISIONARY','THE FREE MAN','THE LEGACY','THE LEGEND','THE GODFATHER'];
@@ -1021,6 +1059,10 @@ function getState(){
       var parsed=JSON.parse(s);
       // Merge: ensure every required field exists
       var state=Object.assign({},defaults,parsed);
+      // Ensure numeric fields are never null
+      if(state.totalXP===null||state.totalXP===undefined||isNaN(state.totalXP))state.totalXP=0;
+      if(state.bestStreak===null||isNaN(state.bestStreak))state.bestStreak=0;
+      if(state.closeSaleStreak===null||isNaN(state.closeSaleStreak))state.closeSaleStreak=0;
       if(!state.trackers)state.trackers=defaults.trackers;
       if(!state.trackers.savings&&state.trackers.savings!==0)state.trackers.savings=0;
       if(!state.trackers.revenue&&state.trackers.revenue!==0)state.trackers.revenue=0;
@@ -1038,6 +1080,17 @@ function getState(){
       if(!state.completedChallenges)state.completedChallenges=[];
       if(!state.todaySessions)state.todaySessions={};
       if(!state.lastPunch)state.lastPunch={};
+      // Clean hoursLog - remove any entries with unrealistic values
+      if(state.hoursLog){
+        Object.keys(state.hoursLog).forEach(function(date){
+          if(state.hoursLog[date]){
+            Object.keys(state.hoursLog[date]).forEach(function(t){
+              var v=state.hoursLog[date][t];
+              if(!v||isNaN(v)||v<0||v>24)state.hoursLog[date][t]=0;
+            });
+          }
+        });
+      }
       return state;
     }
   }catch(e){console.error('getState error:',e);}
@@ -1046,7 +1099,7 @@ function getState(){
 function saveState(s){try{localStorage.setItem('caio_rpg_v4',JSON.stringify(s));}catch(e){}}
 function getToday(){return new Date().toISOString().slice(0,10);}
 function getMonth(){return new Date().toISOString().slice(0,7);}
-function getLevel(xp){for(let i=LEVELS.length-1;i>=0;i--)if(xp>=LEVELS[i])return i+1;return 1;}
+function getLevel(xp){xp=parseInt(xp)||0;for(let i=LEVELS.length-1;i>=0;i--)if(xp>=LEVELS[i])return i+1;return 1;}
 function getDayCats(state,today){const t=today||getToday();const fromLog=new Set(state.log.filter(l=>l.date===t).map(l=>l.type));const hl=(state.hoursLog&&state.hoursLog[t])||{};const fromHours=new Set(Object.keys(hl).filter(k=>(hl[k]||0)>0));return new Set([...fromLog,...fromHours]).size;}
 
 function getCommissionRate(monthlySold){
@@ -1085,7 +1138,7 @@ function logAppt(isSale){
   const value=isSale?parseFloat(valueInput.value)||1500:0;
   if(isSale)valueInput.value='';
 
-  const prevLevel=getLevel(state.totalXP);
+  var prevLevel=getLevel(state.totalXP);
   const xpGain=isSale?75:15;
   state.totalXP+=xpGain;
 
@@ -1124,29 +1177,61 @@ function logAppt(isSale){
 }
 
 // ============ PUNCH IN ============
+var SESSION_COLORS={store:'var(--green)',knowledge:'var(--purple)',gym:'var(--pink)',recovery:'var(--blue)',build:'var(--gold)',relationship:'var(--rose)'};
+function clearBtns(type){
+  document.querySelectorAll('.hq-'+type).forEach(function(b){
+    b.classList.remove('active-sel');
+    b.style.cssText='';
+  });
+}
 function quickLog(type, hours){
-  try {
-    const input = document.getElementById('hi-'+type);
-    if(input) input.value = hours;
-    logHours(type);
-    
-  } catch(e) { console.error('quickLog error:', e); }
+  var card = document.getElementById('hcard-'+type);
+  var current = card ? parseFloat(card.getAttribute('data-selected')) : null;
+  var color = SESSION_COLORS[type] || 'var(--green)';
+  // Toggle off if same button tapped again
+  if(current && current === hours){
+    if(card) card.removeAttribute('data-selected');
+    clearBtns(type);
+    var disp = document.getElementById('hsel-'+type);
+    if(disp) disp.textContent = '';
+    return;
+  }
+  // Select new button
+  if(card) card.setAttribute('data-selected', hours);
+  clearBtns(type);
+  var key = String(hours).replace('.','_');
+  var btn = document.getElementById('hq-'+type+'-'+key);
+  if(btn){
+    btn.style.cssText='border:2px solid '+color+';color:'+color+';font-weight:700;';
+  }
+  var disp = document.getElementById('hsel-'+type);
+  if(disp) disp.textContent = hours >= 1 ? hours+'h selected' : (hours*60)+'m selected';
+  var inp = document.getElementById('hi-'+type);
+  if(inp) inp.value = '';
 }
 
 function logHours(type){
-  const state=getState();
-  const today=getToday();
-  const s=SESSIONS[type];
-  const input=document.getElementById('hi-'+type);
-  const hours=parseFloat(input?input.value:0)||0;
-  if(hours<=0||hours>16){
-    showToast(0,'ENTER VALID HOURS (0.5 - 16)');
-    
+  var state=getState();
+  var today=getToday();
+  var s=SESSIONS[type];
+  // Get hours from quick-select OR custom input
+  var card=document.getElementById('hcard-'+type);
+  var selVal=card?card.getAttribute('data-selected'):null;
+  var selected=selVal?parseFloat(selVal):0;
+  var inp=document.getElementById('hi-'+type);
+  var custom=inp?parseFloat(inp.value):0;
+  var hours=(custom>0)?custom:(selected>0?selected:0);
+  if(!hours||hours<=0||hours>16){
+    showToast(0,'SELECT A TIME OR ENTER CUSTOM HOURS');
     return;
   }
-  const xpEarned=Math.round(s.xpPerHour*hours);
-  const note=(document.getElementById('n-'+type)||{}).value||'';
-  const prevLevel=getLevel(state.totalXP);
+  var input=inp;
+  var rate=s.xpPerHour||s.xp||50;
+  var xpEarned=Math.round(rate*hours);
+  if(isNaN(xpEarned)||xpEarned<0)xpEarned=0;
+  console.log('logHours:',type,hours,'hrs x',rate,'xpPerHour =',xpEarned,'XP');
+  var note=(document.getElementById('n-'+type)||{}).value||'';
+  var prevLevel=getLevel(state.totalXP);
   state.totalXP+=xpEarned;
   // Track hours per type per day
   if(!state.hoursLog)state.hoursLog={};
@@ -1164,7 +1249,7 @@ function logHours(type){
   state.lastPunch[type]=today;
   state.bestStreak=Math.max(state.bestStreak,streakMax(state.streaks));
   // Log entry
-  const label=hours===Math.floor(hours)?hours+'h':hours+'h';
+  var label=hours===Math.floor(hours)?hours+'h':hours.toFixed(1)+'h';
   state.log.unshift({
     type,name:s.name,icon:s.icon,xp:xpEarned,
     hours,timestamp:new Date().toISOString(),date:today,note,
@@ -1173,9 +1258,14 @@ function logHours(type){
   if(state.log.length>500)state.log=state.log.slice(0,500);
   // Clear inputs
   if(input)input.value='';
-  const noteEl=document.getElementById('n-'+type);if(noteEl)noteEl.value='';
+  var cardEl=document.getElementById('hcard-'+type);
+  if(cardEl)cardEl.removeAttribute('data-selected');
+  clearBtns(type);
+  var dispEl=document.getElementById('hsel-'+type);
+  if(dispEl)dispEl.textContent='';
+  var noteEl=document.getElementById('n-'+type);if(noteEl)noteEl.value='';
   // Combo
-  const cats=getDayCats(state,today);
+  var cats=getDayCats(state,today);
   let bonusXP=0;
   if(cats===3){bonusXP=50;showCombo('COMBO x3! 🎯','3 CATEGORIES TODAY · +50 BONUS XP');}
   if(cats===5){bonusXP=150;showCombo('FULL SEND! 🚀','5 CATEGORIES · +150 BONUS XP');}
@@ -1194,7 +1284,9 @@ function logHours(type){
   checkAchievements(state);
   const newLevel=getLevel(state.totalXP);
   if(newLevel>prevLevel){setTimeout(()=>showLevelUp(newLevel),500);spawnConfetti();}
-  showToast(xpEarned+bonusXP,'+'+label+' '+s.name.toUpperCase());
+  var totalXPEarned=xpEarned+bonusXP;
+  var xpLabel='+'+totalXPEarned+' XP · '+label;
+  showToast(totalXPEarned, xpLabel);
   
   renderAll();
 }
@@ -1545,15 +1637,15 @@ function renderAll(){
   const prevThr=LEVELS[level-1]||0;
   const pct=Math.min(100,((state.totalXP-prevThr)/(nextThr-prevThr))*100);
   setEl('level-badge','LVL '+level);
-  setEl('xp-display',state.totalXP.toLocaleString());
-  setEl('xp-next',nextThr.toLocaleString());
-  setEl('best-streak',state.bestStreak);
+  setEl('xp-display',(state.totalXP||0).toLocaleString());
+  setEl('xp-next',(nextThr||500).toLocaleString());
+  setEl('best-streak',state.bestStreak||0);
   setEl('char-title',TITLES[Math.min(level-1,TITLES.length-1)]);
   const xpBar=document.getElementById('xp-bar');if(xpBar)xpBar.style.width=pct+'%';
 
   // Today stats
   const todayLog=state.log.filter(l=>l.date===today);
-  const todayXP=todayLog.reduce((s,l)=>s+l.xp,0)+state.appointments.filter(a=>a.date===today).length*15;
+  const todayXP=todayLog.reduce((s,l)=>s+(l.xp||0),0)+state.appointments.filter(a=>a.date===today).reduce((s,a)=>s+(a.sale?75:15),0);
   const todayCloses=state.appointments.filter(a=>a.sale&&a.date===today).length;
   setEl('today-xp',todayXP);
   setEl('cur-streak',Object.values(state.streaks).length?streakMax(state.streaks):0);
@@ -1629,17 +1721,24 @@ function renderAll(){
   const todayHours=state.hoursLog[today]||{};
   let totalHoursToday=0;
   let totalXPFromHours=0;
-  Object.keys(SESSIONS).forEach(type=>{
-    const s=SESSIONS[type];
-    const hrs=todayHours[type]||0;
+  Object.keys(SESSIONS).forEach(function(type){
+    var s=SESSIONS[type];
+    var hrs=parseFloat(todayHours[type])||0;
     totalHoursToday+=hrs;
     totalXPFromHours+=Math.round(s.xpPerHour*hrs);
-    const streak=document.getElementById('s-'+type);if(streak)streak.textContent=state.streaks[type]||0;
-    const hEl=document.getElementById('h-'+type);
-    if(hEl)hEl.textContent=hrs>0?(hrs===Math.floor(hrs)?hrs+'h':hrs+'h'):'0h';
+    var streak=document.getElementById('s-'+type);if(streak)streak.textContent=state.streaks[type]||0;
+    // Update per-card today display
+    var hEl=document.getElementById('h-'+type);
+    var hLabel=hrs>0?(hrs===Math.floor(hrs)?hrs+'h':hrs.toFixed(1)+'h'):'0h';
+    if(hEl)hEl.textContent=hLabel;
+    // Update summary grid
+    var hSum=document.getElementById('hsum-'+type);
+    if(hSum)hSum.textContent=hLabel;
   });
-  setEl('today-hours-total',totalHoursToday>0?(totalHoursToday===Math.floor(totalHoursToday)?totalHoursToday+'h':totalHoursToday.toFixed(1)+'h'):'0h');
-  setEl('today-xp-from-hours','+'+totalXPFromHours+' XP earned today');
+  var safeTotal=isNaN(totalHoursToday)?0:totalHoursToday;
+  var safeTotalLabel=safeTotal>0?(safeTotal===Math.floor(safeTotal)?safeTotal+'h':safeTotal.toFixed(1)+'h'):'0h';
+  setEl('today-hours-total',safeTotalLabel);
+  setEl('today-xp-from-hours','+'+(isNaN(totalXPFromHours)?0:totalXPFromHours)+' XP earned today');
 
   // Challenges
   const challenges=generateChallenges(state);saveState(state);
@@ -1707,7 +1806,7 @@ function renderAll(){
   renderAch('ach-preview',6);renderAch('ach-full',ACHIEVEMENTS.length);
 
   // Combo
-  const cats=getDayCats(state,today);
+  var cats=getDayCats(state,today);
   const cb=document.getElementById('combo-banner');
   if(cb){if(cats>=3){cb.classList.add('show');setEl('combo-title',cats>=5?'FULL SEND! 🚀':'COMBO x'+cats+'! 🎯');setEl('combo-sub',cats+' CATEGORIES TODAY · BONUS XP EARNED');}else cb.classList.remove('show');}
 
@@ -1835,7 +1934,7 @@ window.onerror=function(msg,src,line,col,err){
   console.error('APP ERROR:',msg,'line:',line,'col:',col,'err:',err);
   return false;
 };
-try{renderAll();}catch(e){console.error('renderAll failed:',e);alert('renderAll error: '+e.message);}
+try{renderAll();}catch(e){console.error('renderAll failed:',e);showToast(0,'ERR: '+e.message);}
 try{renderTodos();}catch(e){console.error('renderTodos failed:',e);}
 </script>
 </body>
